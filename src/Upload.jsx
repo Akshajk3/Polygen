@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import { useNavigate, Link } from "react-router-dom";
-import {db, storage} from "./firebase"
-import {v4 as uuid} from "uuid";
+import { storage } from "./firebase"
+import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import Attach from "./img/paper-clip.png"
 
@@ -18,7 +18,9 @@ const Upload = () => {
         }
         
         images.forEach((img) => {
-        const storageRef = ref(storage, uuid());
+        const directory_path = 'images/'
+        
+        const storageRef = ref(storage, directory_path + uuid());
         const uploadTask = uploadBytesResumable(storageRef, img);
 
         uploadTask.on(
