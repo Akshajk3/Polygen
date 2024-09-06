@@ -1,49 +1,81 @@
-import React, {useContext, useState} from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { storage } from "./firebase"
+import React, { useState } from "react";
+import { storage } from "./firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import Attach from "./img/paper-clip.png"
-
+import Attach from "./img/paper-clip.png";
 
 const Upload = () => {
     const [images, setImages] = useState([]);
+    const webhookURL = "https://af89-34-80-122-32.ngrok-free.app/webhook"; // Your Colab notebook webhook URL
 
-
-    const handleSend = async() => {
-
-        if (images.length == 0) {
-            console.log("No Files selected.")
+    const handleSend = async () => {
+        if (images.length === 0) {
+            console.log("No Files selected.");
             return;
         }
-        
+
+        let uploadPromises = [];
+        let uploadedImageURLs = [];
+
+        // Upload each image
         images.forEach((img) => {
-        const directory_path = 'images/'
-        
-        const storageRef = ref(storage, directory_path + uuid());
-        const uploadTask = uploadBytesResumable(storageRef, img);
+            const directory_path = 'images/';
+            const storageRef = ref(storage, directory_path + uuid());
+            const uploadTask = uploadBytesResumable(storageRef, img);
 
-        uploadTask.on(
-            "state_changed", // State changes (progress, etc.)
-            (snapshot) => {
-                // You can monitor progress here if needed
-            },
-            (error) => {
-                console.error("Upload failed:", error);
-            },
-            () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log("File available at:", downloadURL);
-                    // You can handle the download URL further here
-                });
+            const uploadPromise = new Promise((resolve, reject) => {
+                uploadTask.on(
+                    "state_changed",
+                    (snapshot) => {
+                        // Optionally monitor progress here
+                    },
+                    (error) => {
+                        console.error("Upload failed:", error);
+                        reject(error);
+                    },
+                    () => {
+                        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                            console.log("File available at:", downloadURL);
+                            uploadedImageURLs.push(downloadURL); // Store the download URL
+                            resolve();
+                        });
+                    }
+                );
+            });
+            uploadPromises.push(uploadPromise);
+        });
+
+        // Wait for all images to be uploaded
+        try {
+            await Promise.all(uploadPromises);
+            console.log("All images uploaded successfully");
+
+            // Notify the Colab server via a webhook after all images are uploaded
+            const response = await fetch(webhookURL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    user_id: uuid(), // Add user ID or other identifier here
+                    images_ready: true,
+                    image_urls: uploadedImageURLs, // Send the list of uploaded image URLs to the server
+                }),
+            });
+
+            if (response.ok) {
+                console.log("Server notified successfully");
+            } else {
+                console.error("Failed to notify server");
             }
-        );})
-    }
+        } catch (error) {
+            console.error("Error uploading images or notifying server:", error);
+        }
+    };
 
-    return(
+    return (
         <div className="input">
-            <div className="send" style={{paddingTop: "100px", textAlign: "center" }}>
-                {/* <img src={Attach} alt="Attach" /> */}
+            <div className="send" style={{ paddingTop: "100px", textAlign: "center" }}>
                 <input
                     type="file"
                     multiple
@@ -52,14 +84,13 @@ const Upload = () => {
                     onChange={(e) => setImages([...e.target.files])}
                 />
                 <label htmlFor="file">
-                    {/* If img is selected, display a preview */}
                     {images.length > 0 ? (
                         images.map((img, index) => (
                             <img
-                                key = {index}
+                                key={index}
                                 src={URL.createObjectURL(img)}
                                 alt={`Selected ${index}`}
-                                style={{width : 50, height : 50, marginRight : 5}}
+                                style={{ width: 50, height: 50, marginRight: 5 }}
                             />
                         ))
                     ) : (
@@ -69,7 +100,7 @@ const Upload = () => {
                 <button onClick={handleSend}>Upload</button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Upload
+export default Upload;
