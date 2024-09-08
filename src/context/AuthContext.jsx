@@ -50,7 +50,7 @@ export function AuthProvider({ children }) {
   const value = {
     userLoggedIn,
     isEmailUser,
-    isGoogleUser,
+    // isGoogleUser,
     currentUser,
     setCurrentUser
   };
