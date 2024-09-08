@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { storage } from "./firebase";
 import { v4 as uuid } from "uuid";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import Attach from "./img/paper-clip.png";
 
 const Upload = () => {
     const [images, setImages] = useState([]);
-    const webhookURL = "https://af89-34-80-122-32.ngrok-free.app/webhook"; // Your Colab notebook webhook URL
+    const [done, setDone] = useState(false)
+    const webhookURL = "https://e49a-34-74-122-140.ngrok-free.app/webhook"; // Your Colab notebook webhook URL
 
     const handleSend = async () => {
         if (images.length === 0) {
@@ -73,6 +74,31 @@ const Upload = () => {
         }
     };
 
+    const checkForFinish = async () => {
+        try {
+            const doneFileRef = ref(storage, 'results/done.txt');
+            await getDownloadURL(doneFileRef);
+            setDone(true);
+        }
+        catch (error) {
+            if (error.code === 'storage/object-not-found') {
+                console.log('done file not found retrying...');
+            } else {
+                console.log('Error: ', error);
+            }
+        }
+    };
+
+    const downloadModels = async () => {
+        if (done === true) {
+            const storage = getStorage();
+            const pathReference = ref(storage, 'result/dense.ply');
+        }
+        else {
+            console.log("Error: Model Not Done Generating")
+        }
+    };
+
     return (
         <div className="input">
             <div className="send" style={{ paddingTop: "100px", textAlign: "center" }}>
@@ -98,6 +124,7 @@ const Upload = () => {
                     )}
                 </label>
                 <button onClick={handleSend}>Upload</button>
+                <button onClick={downloadModels}>Download</button>
             </div>
         </div>
     );
