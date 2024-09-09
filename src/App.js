@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="App">
       <AuthProvider>
-        <Login/>
+        {/* <Login/> */}
         <div className="w-full h-screen flex flex-col">{routesElement}</div>
         {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
