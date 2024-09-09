@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { storage } from "./firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
@@ -98,6 +98,14 @@ const Upload = () => {
             console.log("Error: Model Not Done Generating")
         }
     };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            console.log("Checking for Finish");
+            checkForFinish();
+        }, 10000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div className="input">
