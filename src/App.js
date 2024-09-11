@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import "./style.scss"
 
 import Upload from "./Upload";
 import Login from "./components/login";
@@ -8,6 +9,7 @@ import Register from "./components/register"
 
 import { AuthProvider } from './context/AuthContext';
 import { useRoutes } from 'react-router-dom';
+
 
 
 function App() {
