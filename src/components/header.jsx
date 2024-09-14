@@ -5,24 +5,38 @@ import { doSignOut } from '../auth'
 
 const Header = () => {
     const navigate = useNavigate()
-    const { userLoggedIn } = useAuth()
+    // const { userLoggedIn } = useAuth()
     return (
-        <nav className='flex flex-row gap-x-2 w-full z-20 fixed top-0 left-0 h-12 border-b place-content-center items-center bg-gray-200'>
-            {
-                userLoggedIn
-                    ?
-                    <>
-                        <button onClick={() => { doSignOut().then(() => { navigate('/login') }) }} className='text-sm text-blue-600 underline'>Logout</button>
-                    </>
-                    :
-                    <>
-                        <Link className='text-sm text-blue-600 underline' to={'/login'}>Login</Link>
-                        <Link className='text-sm text-blue-600 underline' to={'/register'}>Register New Account</Link>
-                    </>
-            }
+        <header className='header'>
+            <a href="/" className='logo'>Logo</a>
 
-        </nav>
+            <nav className='navbar'>
+                <a href="/">Home</a>
+                <a href="/">About</a>
+                <a href="/">Sign Up</a>
+                <a href="/">Login</a>
+                <a href="/">Contact</a>
+            </nav>
+        </header>
     )
 }
 
 export default Header
+
+{/* <nav className=''>
+            {
+                userLoggedIn
+                    ?
+                    <>
+                       <button onClick={() => { doSignOut().then(() => { navigate('/login') }) }} className='text-sm text-blue-600 underline'>Logout</button>
+                    </>
+                    :
+                    <>
+                        <a href="/home">Home</a>
+                        <a href="/login">Login</a>
+                        <a href="/register">Register</a>
+
+                    </>
+            }
+
+        </nav> */}

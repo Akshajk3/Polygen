@@ -392,3 +392,43 @@
         }
     }
 }
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 10%;
+    background: slategray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 32px;
+    color: #ffff;
+    font-weight: 700;
+}
+
+.navbar {
+    position: relative;
+    font-size: 18px;
+    color: white;
+    font-weight: 509;
+    margin-left: 40px;
+}
+
+.narvbar a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+}
+
+.narvbar a:hover::before {
+    width: 100%;
+}

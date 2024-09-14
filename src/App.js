@@ -6,6 +6,7 @@ import Upload from "./Upload";
 import Login from "./components/login";
 import Home from "./components/home"
 import Register from "./components/register"
+import Navbar from "./components/header"
 
 import { AuthProvider } from './context/AuthContext';
 import { useRoutes } from 'react-router-dom';
@@ -30,13 +31,27 @@ function App() {
       path: "/home",
       element: <Home />,
     },
+    {
+      path: "/header",
+      element: <Navbar />,
+    },
   ];
   let routesElement = useRoutes(routesArray);
   return (
     <div className="App">
+      <Navbar />
       <AuthProvider>
         {/* <Login/> */}
         <div className="w-full h-screen flex flex-col">{routesElement}</div>
+
+      </AuthProvider>
+    </div>
+  );
+  
+}
+
+export default App;
+
         {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -52,9 +67,3 @@ function App() {
         </a>
       </header
   > */}
-      </AuthProvider>
-    </div>
-  );
-}
-
-export default App;
