@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { storage } from "./firebase";
 import { v4 as uuid } from "uuid";
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import Attach from "./img/paper-clip.png";
 
 const Upload = () => {
@@ -112,6 +112,7 @@ const Upload = () => {
         if (done) {
             const pointCloudReference = ref(storage, 'results/dense.ply');
             const meshReference = ref(storage, 'results/dense.obj');
+            const doneFileRef = ref(storage, 'results/done.txt');
             
             try {
                 const pointCloudURL = await getDownloadURL(pointCloudReference);
@@ -130,6 +131,10 @@ const Upload = () => {
                 meshLink.href = URL.createObjectURL(meshBlob);
                 meshLink.download = 'dense.obj';
                 meshLink.click();
+
+                deleteObject(pointCloudReference);
+                deleteObject(meshReference);
+                deleteObject(doneFileRef);
 
             } catch(error) {
                 console.error("Error downloading models: ", error);
