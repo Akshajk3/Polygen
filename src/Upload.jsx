@@ -7,23 +7,31 @@ import Attach from "./img/paper-clip.png";
 const Upload = () => {
     const [images, setImages] = useState([]);
     const [done, setDone] = useState(false)
-    const webhookURL = "https://e49a-34-74-122-140.ngrok-free.app/webhook"; // Your Colab notebook webhook URL
+    const [statusMessage, setStatusMessage] = useState("");
+    const [checkInterval, setCheckInterval] = useState(null);
+    const [notified, setNotified] = useState(false);
+    const webhookURL = "https://f16a-34-173-65-12.ngrok-free.app/webhook"; // Your Colab notebook webhook URL
 
     const handleSend = async () => {
         if (images.length === 0) {
             console.log("No Files selected.");
             return;
         }
-
+    
+        if (notified) {
+            console.log("Already notified.");
+            return;
+        }
+    
+        setStatusMessage("Uploading...");
         let uploadPromises = [];
         let uploadedImageURLs = [];
-
-        // Upload each image
+    
         images.forEach((img) => {
             const directory_path = 'images/';
             const storageRef = ref(storage, directory_path + uuid());
             const uploadTask = uploadBytesResumable(storageRef, img);
-
+    
             const uploadPromise = new Promise((resolve, reject) => {
                 uploadTask.on(
                     "state_changed",
@@ -45,12 +53,13 @@ const Upload = () => {
             });
             uploadPromises.push(uploadPromise);
         });
-
-        // Wait for all images to be uploaded
+    
         try {
             await Promise.all(uploadPromises);
             console.log("All images uploaded successfully");
-
+    
+            setStatusMessage("Generating Models...");
+    
             // Notify the Colab server via a webhook after all images are uploaded
             const response = await fetch(webhookURL, {
                 method: "POST",
@@ -63,14 +72,17 @@ const Upload = () => {
                     image_urls: uploadedImageURLs, // Send the list of uploaded image URLs to the server
                 }),
             });
-
+    
             if (response.ok) {
                 console.log("Server notified successfully");
+                setNotified(true); // Mark as notified
             } else {
                 console.error("Failed to notify server");
+                setStatusMessage("Error notifying server");
             }
         } catch (error) {
             console.error("Error uploading images or notifying server:", error);
+            setStatusMessage("Error during upload please try again.");
         }
     };
 
@@ -79,23 +91,54 @@ const Upload = () => {
             const doneFileRef = ref(storage, 'results/done.txt');
             await getDownloadURL(doneFileRef);
             setDone(true);
+            setStatusMessage("Models are ready for download");
+
+            if (checkInterval) {
+                clearInterval(checkInterval);
+                setCheckInterval(null);
+            }
         }
         catch (error) {
             if (error.code === 'storage/object-not-found') {
                 console.log('done file not found retrying...');
             } else {
                 console.log('Error: ', error);
+                setStatusMessage("Error while generating models");
             }
         }
     };
 
     const downloadModels = async () => {
-        if (done === true) {
-            const storage = getStorage();
-            const pathReference = ref(storage, 'result/dense.ply');
+        if (done) {
+            const pointCloudReference = ref(storage, 'results/dense.ply');
+            const meshReference = ref(storage, 'results/dense.obj');
+            
+            try {
+                const pointCloudURL = await getDownloadURL(pointCloudReference);
+                const meshURL = await getDownloadURL(meshReference);
+
+                const pointCloudResponse = await fetch(pointCloudURL);
+                const pointCloudBlob = await pointCloudResponse.blob();
+                const pointCloudLink = document.createElement('a');
+                pointCloudLink.href = URL.createObjectURL(pointCloudBlob);
+                pointCloudLink.download = 'dense.ply';
+                pointCloudLink.click();
+
+                const meshResponse = await fetch(meshURL);
+                const meshBlob = await meshResponse.blob();
+                const meshLink = document.createElement('a');
+                meshLink.href = URL.createObjectURL(meshBlob);
+                meshLink.download = 'dense.obj';
+                meshLink.click();
+
+            } catch(error) {
+                console.error("Error downloading models: ", error);
+                setStatusMessage("Error downloading models, please try again");
+            }
         }
         else {
             console.log("Error: Model Not Done Generating")
+            setStatusMessage("Generating Models...")
         }
     };
 
@@ -132,7 +175,10 @@ const Upload = () => {
                     )}
                 </label>
                 <button onClick={handleSend}>Upload</button>
-                <button onClick={downloadModels}>Download</button>
+                { done && (
+                <button onClick={downloadModels} style={{marginTop : '20px'}}>Download Models</button>
+                )}
+                <p>{statusMessage}</p>
             </div>
         </div>
     );
