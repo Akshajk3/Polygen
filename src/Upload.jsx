@@ -157,7 +157,7 @@ const Upload = () => {
 
     return (
         <div className="input">
-            <div className="send" style={{ paddingTop: "100px", textAlign: "center" }}>
+            <div className="send" style={{ paddingTop: "300px", textAlign: "center" }}>
                 <input
                     type="file"
                     multiple
@@ -184,6 +184,11 @@ const Upload = () => {
                 <button onClick={downloadModels} style={{marginTop : '20px'}}>Download Models</button>
                 )}
                 <p>{statusMessage}</p>
+                <div style={{ paddingTop: "300px"}}>
+                    This is some really cool text and have some instructions or soemthing here.
+                    IDK Upload ur images make sure the images are good so you the stuff actually
+                    comes out good.
+                </div>
             </div>
         </div>
     );
