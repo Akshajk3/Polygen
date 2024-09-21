@@ -32,9 +32,11 @@ const Login = () => {
 
     return (
         <div>
-            {userLoggedIn && (<Navigate to={'/home'} replace={true} />)}
+            {userLoggedIn && (<Navigate to={'/upload'} replace={true} />)}
             <main className="formContainer">
-                <div className="formWrapper">
+                <div className='shape'></div>
+                <div className='shape'></div>
+                <div className="formWrapper"> 
                     <div className="">
                         <div className="">
                             <h3 className="logo">Welcome Back</h3>
@@ -42,10 +44,10 @@ const Login = () => {
                     </div>
                     <form
                         onSubmit={onSubmit}
-                        className="space-y-5"
+                        className=""
                     >
                         <div>
-                            <label className="text-sm text-gray-600 font-bold">
+                            <label className="">
                                 Email
                             </label>
                             <input
@@ -53,13 +55,13 @@ const Login = () => {
                                 autoComplete='email'
                                 required
                                 value={email} onChange={(e) => { setEmail(e.target.value) }}
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+                                className=""
                             />
                         </div>
 
 
                         <div>
-                            <label className="text-sm text-gray-600 font-bold">
+                            <label className="">
                                 Password
                             </label>
                             <input

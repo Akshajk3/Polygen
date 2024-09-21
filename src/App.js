@@ -32,6 +32,10 @@ function App() {
       element: <Home />,
     },
     {
+      path: "/upload",
+      element: <Upload />,
+    },
+    {
       path: "/header",
       element: <Navbar />,
     },
