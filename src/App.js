@@ -46,7 +46,7 @@ function App() {
       <Navbar />
       <AuthProvider>
         {/* <Login/> */}
-        <div className="w-full h-screen flex flex-col">{routesElement}</div>
+        <div>{routesElement}</div>
 
       </AuthProvider>
     </div>

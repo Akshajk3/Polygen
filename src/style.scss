@@ -26,15 +26,16 @@
     line-height: 42px;
 }
 
-
+// .divbody
 
 
 .formContainer{
-    background-color: #000000;
+    background-color: #080710;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     .shape{
         height: 200px;
@@ -47,26 +48,41 @@
             #1845ad,
             #23a2f6
         );
-        left: 550px;
+        left: 600px;
         top: 200px;
     }
     .shape:last-child{
         background: linear-gradient(
-            to right,
-            #ff512f,
+            #f84724,
             #f09819
         );
-        right: -30px;
-        bottom: -80px;
+        right: 600px;
+        bottom: -100px;
     }
     .formWrapper{
-        background-color: white;
-        padding: 20px 60px;
-        border-radius: 10px;
-        display: flex;
+        height: 600px;
+        width: 400px;
+        background-color: rgba(255,255,255,0.13);
+        position: absolute;
+        transform: translate(-50%,-50%);
+        top: 53%;
         flex-direction: column;
         gap: 10px;
+        display: flex;
         align-items: center;
+        left: 50%;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.1);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+        padding: 50px 35px;
+
+    .logo {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+    }
 
     .formlogin{
         height: 520px;
@@ -85,6 +101,12 @@
         gap: 10px;
         align-items: center;
     }
+        .formlabel {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
 
         .logo{
             color: rgb(125, 85, 199);
