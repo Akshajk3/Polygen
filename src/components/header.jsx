@@ -6,19 +6,24 @@ import { doSignOut } from '../auth'
 const Header = () => {
     const navigate = useNavigate()
     // const { userLoggedIn } = useAuth()
-    return (
-        <header className='header'>
-            <a href="/" className='logo'>Logo</a>
 
-            <nav className='navbar'>
-                <a href="/">Home</a>
-                <a href="/">About</a>
-                <a href="/">Sign Up</a>
-                <a href="/">Login</a>
-                <a href="/">Contact</a>
-            </nav>
-        </header>
-    )
+
+
+    return (
+        <div>
+            <header className='header'>
+                <a href="/" className='logoimg'>Logo</a>
+
+                <nav className='navbar'>
+                    <a href="/">Home</a>
+                    <a href="/">Sign Up</a>
+                    <a href="/">Login</a>
+                    <a href="/">Contact</a>
+                    
+                </nav>
+            </header>
+        </div>
+    );
 }
 
 export default Header
