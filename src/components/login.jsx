@@ -34,7 +34,8 @@ const Login = () => {
         <div className='formContainer'>
             {userLoggedIn && (<Navigate to={'/upload'} replace={true} />)}
             <div className='shape'></div>
-            {/* <div className='shape:last-child'></div> */}
+            <div className='shape'></div>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet"></link>
     
             <div className='formWrapper'>
                 <form onSubmit={onSubmit}>
@@ -46,7 +47,7 @@ const Login = () => {
                         autoComplete='email' 
                         required 
                         value={email} onChange={(e) => {setEmail(e.target.value)}} 
-                        className=''/>
+                        className='formbox'/>
                     </div>
 
                     <div>
@@ -56,7 +57,7 @@ const Login = () => {
                         autoComplete='current-password' 
                         required 
                         value={password} onChange={(e) => {setPassword(e.target.value)}} 
-                        className=''/>
+                        className='formbox'/>
                     </div>
 
                     {errorMessage && (
@@ -73,13 +74,13 @@ const Login = () => {
 
                 </form>
 
-                <p className="">Don't have an account? <Link to={'/register'} className="">Sign up</Link></p>
+                <p className="smalltext">Don't have an account? <Link to={'/register'} className="">Sign up</Link></p>
 
                 <button
                         disabled={isSigningIn}
                         onClick={(e) => { onGoogleSignIn(e) }}
-                        className={`  ${isSigningIn ? '' : ''}`}>
-                        <svg className="" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        className={`google-signin-btn ${isSigningIn ? '' : ''}`}>
+                        <svg className="google-signin-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 
                             <g clipPath="url(#clip0_17_40)">
                                 <path d="M47.532 24.5528C47.532 22.9214 47.3997 21.2811 47.1175 19.6761H24.48V28.9181H37.4434C36.9055 31.8988 35.177 34.5356 32.6461 36.2111V42.2078H40.3801C44.9217 38.0278 47.532 31.8547 47.532 24.5528Z" fill="#4285F4" />

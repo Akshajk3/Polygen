@@ -36,6 +36,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    overflow: hidden;
 
     .shape{
         height: 200px;
@@ -43,7 +44,7 @@
         position: absolute;
         border-radius: 50%;
     }
-    .shape:first-child{
+    .shape:nth-child(1){
         background: linear-gradient(
             #1845ad,
             #23a2f6
@@ -51,21 +52,22 @@
         left: 600px;
         top: 200px;
     }
-    .shape:last-child{
+    .shape:nth-child(2){
         background: linear-gradient(
             #f84724,
             #f09819
         );
-        right: 600px;
-        bottom: -100px;
+        right: 630px;
+        bottom: 80px;
     }
-    .formWrapper{
-        height: 600px;
+
+    .formWrapper2{
+        height: 630px;
         width: 400px;
         background-color: rgba(255,255,255,0.13);
         position: absolute;
         transform: translate(-50%,-50%);
-        top: 53%;
+        top: 55%;
         flex-direction: column;
         gap: 10px;
         display: flex;
@@ -77,14 +79,36 @@
         box-shadow: 0 0 40px rgba(8,7,16,0.6);
         padding: 50px 35px;
 
-    .logo {
+        .logo {
         font-size: 32px;
         font-weight: 500;
         line-height: 42px;
         text-align: center;
-    }
+        }
+        
+        .smalltext { 
+            font-size: 16px;
+        }
 
-    .formlogin{
+        .google-signin-btn {
+            display: flex;
+        align-items: center;
+        background-color: white;
+        color: #4285F4;
+        border: 1px solid #d0a7ff;
+        border-radius: 5px;
+        padding: 8px 16px;
+        font-weight: bold;
+        cursor: pointer;
+        gap: 10px;
+        }
+        .google-signin-icon {
+            width: 24px;  /* Set the width of the Google icon */
+            height: 24px; /* Set the height of the Google icon */
+        }
+
+
+        .formlogin{
         height: 520px;
         width: 400px;
         background-color: rgba(58, 207, 108, 0.842);
@@ -103,9 +127,163 @@
     }
         .formlabel {
             display: block;
-            margin-top: 30px;
-            font-size: 16px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 20px;
             font-weight: 500;
+        }
+
+        .formbox {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(0,0,0,0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .logo{
+            color: rgb(125, 85, 199);
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .title{
+            color: rgb(86, 70, 226);
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            input{
+                padding: 15px;
+                border: none;
+                border-bottom: 1px solid #d0a7ff;
+                width: 250px;
+            &::placeholder{
+                color: rgba($color: #6e426c, $alpha: 0.4);
+            }
+            }
+
+            button{
+                background-color: #a251ff;
+                color: white;
+                padding: 10px;
+                font-weight: bold;
+                border: none;
+                cursor: pointer;
+            }
+
+            label{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: #d0a7ff;
+                font-size: 14px;
+                cursor: pointer;
+
+                img{
+                    width: 40px;
+                }
+            }
+        }
+
+        p{
+            color: #6e426c;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    }
+
+    .formWrapper{
+        height: 550px;
+        width: 400px;
+        background-color: rgba(255,255,255,0.13);
+        position: absolute;
+        transform: translate(-50%,-50%);
+        top: 55%;
+        flex-direction: column;
+        gap: 10px;
+        display: flex;
+        align-items: center;
+        left: 50%;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.1);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+        padding: 50px 35px;
+
+        .logo {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+        }
+        
+        .smalltext { 
+            font-size: 16px;
+        }
+
+        .google-signin-btn {
+            display: flex;
+        align-items: center;
+        background-color: white;
+        color: #4285F4;
+        border: 1px solid #d0a7ff;
+        border-radius: 5px;
+        padding: 8px 16px;
+        font-weight: bold;
+        cursor: pointer;
+        gap: 10px;
+        }
+        .google-signin-icon {
+            width: 24px;  /* Set the width of the Google icon */
+            height: 24px; /* Set the height of the Google icon */
+        }
+
+
+        .formlogin{
+        height: 520px;
+        width: 400px;
+        background-color: rgba(58, 207, 108, 0.842);
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        display: flex;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.1);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+        padding: 50px 35px;
+        gap: 10px;
+        align-items: center;
+    }
+        .formlabel {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .formbox {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(0,0,0,0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 300;
         }
 
         .logo{
