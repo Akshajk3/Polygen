@@ -96,7 +96,7 @@ const Register = () => {
 
                 </form>
 
-                <p className="smalltext">Already have an account? {'   '}<Link to={'/register'} className="">Log In</Link></p>
+                <p className="smalltext">Already have an account? {'   '}<Link to={'/login'} className="">Log In</Link></p>
 
                 <button
                         disabled={isRegistering}

@@ -6,7 +6,7 @@ import { auth } from '../firebase'
 
 const Header = () => {
     const navigate = useNavigate()
-    const userLoggedIn  = useAuth()
+    const userLoggedIn = useAuth()
 
     const handleLogout = async () => {
         await doSignOut(auth);
@@ -17,18 +17,18 @@ const Header = () => {
 
     return (
         <div>
-            <header className='header'>
+            <header className='headernav'>
                 { userLoggedIn ? (
                 <nav>
                     <Link to="/home" className='logoimg'>Logo</Link>
-                    <Link to="/upload">Upload</Link>
-                    <button onClick={handleLogout}>Logout</button>
+                    <Link className='navlink' to="/upload">Upload</Link>
+                    <button className='navlink' onClick={handleLogout}>Logout</button>
                 </nav>
                 ) : (
                 <nav>
                     <Link to="/home" className='logoimg'>Logo</Link>
-                    <Link to="/register">Sign Up</Link>
-                    <Link to="/login">Login</Link>
+                    <Link className='navlink' to="/register">Sign Up</Link>
+                    <Link className='navlink' to="/login">Login</Link>
                 </nav>
                 )}
             </header>

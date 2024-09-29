@@ -157,6 +157,7 @@ const Upload = () => {
 
     return (
         <div className="input">
+            <div style={{color: 'white'}}>this is text</div>
             <div className="send" style={{ paddingTop: "300px", textAlign: "center" }}>
                 <input
                     type="file"
@@ -169,6 +170,7 @@ const Upload = () => {
                     {images.length > 0 ? (
                         images.map((img, index) => (
                             <img
+                                className=""
                                 key={index}
                                 src={URL.createObjectURL(img)}
                                 alt={`Selected ${index}`}
@@ -176,15 +178,15 @@ const Upload = () => {
                             />
                         ))
                     ) : (
-                        <img src={Attach} alt="Attach" />
+                        <img className="" src={Attach} alt="Attach" />
                     )}
                 </label>
-                <button onClick={handleSend}>Upload</button>
+                <button className="" onClick={handleSend}>Upload</button>
                 { done && (
                 <button onClick={downloadModels} style={{marginTop : '20px'}}>Download Models</button>
                 )}
                 <p>{statusMessage}</p>
-                <div style={{ paddingTop: "300px"}}>
+                <div style={{ color: 'white', paddingTop: "300px"}}>
                     This is some really cool text and have some instructions or soemthing here.
                     IDK Upload ur images make sure the images are good so you the stuff actually
                     comes out good.
