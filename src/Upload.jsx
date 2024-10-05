@@ -3,6 +3,7 @@ import { storage } from "./firebase";
 import { v4 as uuid } from "uuid";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import Attach from "./img/paper-clip.png";
+import threedimage from "./img/3dimage.jpg";
 
 const Upload = () => {
     const [images, setImages] = useState([]);
@@ -156,7 +157,98 @@ const Upload = () => {
     }, []);
 
     return (
-        <div className="input">
+        <div className="upload-page">
+            <div className="input-container">
+                <div className="info-text">
+                    This app allows you to <span>upload images</span> and converts them into <span>3D models</span>!
+                </div>
+
+                <div className="send-container">
+                    <input
+                        type="file"
+                        multiple
+                        className="file-input"
+                        id="file"
+                        onChange={(e) => setImages([...e.target.files])}
+                        style={{ display: 'none' }} // hide default file input
+                    />
+                    <button className="upload-button" onClick={handleSend}>
+                        Upload
+                    </button>
+
+                    {images.length > 0 &&
+                        images.map((img, index) => (
+                            <img
+                                className="preview-image"
+                                key={index}
+                                src={URL.createObjectURL(img)}
+                                alt={`Selected ${index}`}
+                            />
+                        ))}
+
+                    {done && (
+                        <button className="download-button" onClick={downloadModels}>
+                            Download Models
+                        </button>
+                    )}
+
+                    <p className="status-message">{statusMessage}</p>
+                    <div className="extra-info">
+                        Make sure to upload high-quality images for the best 3D models!
+                    </div>
+                </div>
+
+                {/* sample 3D Image */}
+                <div className="example-image-container">
+                    <img src={threedimage} alt="Example 3D Model" className="example-3d-image" />
+                </div>
+            </div>
+
+            {/* scroll down arrow */}
+            <div
+                className="scroll-down-arrow"
+                onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })}
+            >
+                ↓
+            </div>
+
+            <div className="instructions-section">
+                <h2 className="instructions-title">How to Use the App</h2>
+
+                <div className="instruction-step">
+                    <div className="step-text">
+                        <h3>Step 1</h3>
+                        <p>Upload High-Quality Images</p>
+                    </div>
+                    <img src={threedimage} alt="Step 1" className="slanted-image" />
+                </div>
+
+                <div className="instruction-step alternate">
+                    <div className="step-text">
+                        <h3>Step 2</h3>
+                        <p>Wait for the 3D Model to Generate</p>
+                    </div>
+                    <img src={threedimage} alt="Step 2" className="slanted-image" />
+                </div>
+
+                <div className="instruction-step">
+                    <div className="step-text">
+                        <h3>Step 3</h3>
+                        <p>Download Your 3D Model</p>
+                    </div>
+                    <img src={threedimage} alt="Step 3" className="slanted-image" />
+                </div>
+            </div>
+        </div>
+
+    );
+};
+
+export default Upload;
+
+{   // aki's original code (just for debugging)
+    
+    /* <div className="input">
             <div style={{color: 'white'}}>this is text</div>
             <div className="send" style={{ paddingTop: "300px", textAlign: "center" }}>
                 <input
@@ -192,8 +284,4 @@ const Upload = () => {
                     comes out good.
                 </div>
             </div>
-        </div>
-    );
-};
-
-export default Upload;
+        </div> */}
