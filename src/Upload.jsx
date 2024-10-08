@@ -218,7 +218,14 @@ const Upload = () => {
                 <div className="instruction-step">
                     <div className="step-text">
                         <h3>Step 1</h3>
-                        <p>Upload High-Quality Images</p>
+                        <p>
+                            <strong>Upload High-Quality Images:</strong>
+                            <p>
+                                Choose multiple high-resolution images of the object you want to turn into a 3D model.
+                                Ensure that you capture images from different angles for the best results.
+                                Clear, well-lit images will improve the accuracy of the 3D model.
+                            </p>
+                        </p>
                     </div>
                     <img src={threedimage} alt="Step 1" className="slanted-image" />
                 </div>
@@ -226,7 +233,14 @@ const Upload = () => {
                 <div className="instruction-step alternate">
                     <div className="step-text">
                         <h3>Step 2</h3>
-                        <p>Wait for the 3D Model to Generate</p>
+                        <p>
+                            <strong>Wait for the 3D Model to Generate:</strong>
+                            <p>   
+                                After uploading, the system will process your images to create a dense 3D model.
+                                This can take a few minutes depending on the number and quality of the images.
+                                Be patient as the model is being generated.
+                            </p>
+                        </p>
                     </div>
                     <img src={threedimage} alt="Step 2" className="slanted-image" />
                 </div>
@@ -234,7 +248,14 @@ const Upload = () => {
                 <div className="instruction-step">
                     <div className="step-text">
                         <h3>Step 3</h3>
-                        <p>Download Your 3D Model</p>
+                        <p>
+                            <strong>Download Your 3D Model:</strong>
+                            <p>
+                                Once the 3D model is ready, you'll be able to download both the point cloud
+                                and mesh files (in .ply and .obj formats). You can use these files for visualization
+                                or further editing in 3D software.
+                            </p>
+                        </p>
                     </div>
                     <img src={threedimage} alt="Step 3" className="slanted-image" />
                 </div>

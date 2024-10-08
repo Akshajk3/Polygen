@@ -33,7 +33,7 @@ function App() {
     },
     {
       path: "/upload",
-      element: <Upload />,
+      element: <Upload/>,
     },
     {
       path: "/header",
