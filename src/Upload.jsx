@@ -181,68 +181,58 @@ const Upload = () => {
 
     return (
         <div className="upload-page">
-            <div className="input-container">
-                <div className="info-text">
-                    This app allows you to <span>upload images</span> and converts them into <span>3D models</span>!
-                </div>
-
-                <div className="send-container">
-                    <input
-                        type="file"
-                        multiple
-                        className="file-input"
-                        id="file"
-                        onChange={(e) => setImages([...e.target.files])}
-                        // style={{ display: 'none' }} // hide default file input
-                    />
-
-
-                    {images.length > 0 &&
-                        images.map((img, index) => (
-                            <img
-                                className="preview-image"
-                                key={index}
-                                src={URL.createObjectURL(img)}
-                                alt={`Selected ${index}`}
-                            />
-                        ))}
-
-                    {done && (
-                        <button className="download-button" onClick={downloadModels}>
-                            Download Models
-                        </button>
-                    )}
-
-                    <p className="status-message">{statusMessage}</p>
-                    <div className="extra-info">
-                        Make sure to upload high-quality images for the best 3D models!
-                    </div>
-                </div>
-
-                {/* Drag and Drop Area */}
-                <div
-                    className="drag-drop-area"
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
-                >
-                    <p>Drag & Drop your files here or click the Upload button above</p>
-                </div>
-                    <button className="upload-button" onClick={handleSend}>
-                        Upload
-                    </button>
-                {/* sample 3D Image */}
-                {/* <div className="example-image-container">
-                    <img src={threedimage} alt="Example 3D Model" className="example-3d-image" />
-                </div> */}
+        <div className="blob"></div> {/* Animated Blob */}
+        <div className="input-container">
+            <div className="info-text">
+                This app allows you to <span>upload images</span> and converts them into <span>3D models</span>!
             </div>
 
-            {/* scroll down arrow */}
+            <div className="send-container">
+                <input
+                    type="file"
+                    multiple
+                    className="file-input"
+                    id="file"
+                    onChange={(e) => setImages([...e.target.files])}
+                />
+
+                {images.length > 0 &&
+                    images.map((img, index) => (
+                        <img
+                            className="preview-image"
+                            key={index}
+                            src={URL.createObjectURL(img)}
+                            alt={`Selected ${index}`}
+                        />
+                    ))}
+
+                {done && (
+                    <button className="download-button" onClick={downloadModels}>
+                        Download Models
+                    </button>
+                )}
+
+                <p className="status-message">{statusMessage}</p>
+                <div className="extra-info">
+                    Make sure to upload high-quality images for the best 3D models!
+                </div>
+            </div>
+
             <div
-                className="scroll-down-arrow"
-                onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })}
+                className="drag-drop-area"
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
             >
-                ↓
+                <p>Drag & Drop your files here or click the Upload button above</p>
+            </div>
+            <button className="upload-button" onClick={handleSend}>
+                Upload
+            </button>
+        </div>
+
+            <div className="scroll-down-arrow" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })}>
+            ↓
             </div>
 
             <div className="instructions-section">
