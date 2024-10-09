@@ -20,13 +20,17 @@ const Header = () => {
             <header className='headernav'>
                 { userLoggedIn ? (
                 <nav>
-                    <Link to="/home" className='logoimg'>Logo</Link>
+                    <Link to="/home" className='logoimg'>
+                        <img src="lifescan.ico" alt="Logo" className="h-24 w-auto object-contain" />
+                    </Link>
                     <Link className='navlink' to="/upload">Upload</Link>
                     <button className='navlink' onClick={handleLogout}>Logout</button>
                 </nav>
                 ) : (
                 <nav>
-                    <Link to="/home" className='logoimg'>Logo</Link>
+                    <Link to="/home" className='logoimg'>
+                        <img src="lifescan.ico" alt="Logo" className="h-24 w-auto object-contain" />
+                    </Link>
                     <Link className='navlink' to="/register">Sign Up</Link>
                     <Link className='navlink' to="/login">Login</Link>
                 </nav>

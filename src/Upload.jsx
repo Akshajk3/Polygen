@@ -196,15 +196,17 @@ const Upload = () => {
                     onChange={(e) => setImages([...e.target.files])}
                 />
 
-                {images.length > 0 &&
-                    images.map((img, index) => (
-                        <img
-                            className="preview-image"
-                            key={index}
-                            src={URL.createObjectURL(img)}
-                            alt={`Selected ${index}`}
-                        />
-                    ))}
+                <div className="grid grid-cols-3 gap-4">
+                    {images.length > 0 &&
+                        images.map((img, index) => (
+                            <img
+                                className="preview-image"
+                                key={index}
+                                src={URL.createObjectURL(img)}
+                                alt={`Selected ${index}`}
+                            />
+                        ))}
+                </div>
 
                 {done && (
                     <button className="download-button" onClick={downloadModels}>
@@ -224,16 +226,12 @@ const Upload = () => {
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
             >
-                <p>Drag & Drop your files here or click the Upload button above</p>
+                <p>Drag & Drop your files here or click the button above</p>
             </div>
             <button className="upload-button" onClick={handleSend}>
                 Upload
             </button>
         </div>
-
-            <div className="scroll-down-arrow" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })}>
-            ↓
-            </div>
 
             <div className="instructions-section">
                 <h2 className="instructions-title">How to Use the App</h2>
