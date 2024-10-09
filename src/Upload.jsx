@@ -156,6 +156,29 @@ const Upload = () => {
         return () => clearInterval(interval);
     }, []);
 
+    const handleDrop = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const files = Array.from(e.dataTransfer.files);
+        if (files.length > 0) {
+            setImages((prevImages) => [...prevImages, ...files]);
+        }
+        e.currentTarget.classList.remove("drag-over");
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.classList.add("drag-over");
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.classList.remove("drag-over");
+    };
+
+
     return (
         <div className="upload-page">
             <div className="input-container">
@@ -170,11 +193,9 @@ const Upload = () => {
                         className="file-input"
                         id="file"
                         onChange={(e) => setImages([...e.target.files])}
-                        style={{ display: 'none' }} // hide default file input
+                        // style={{ display: 'none' }} // hide default file input
                     />
-                    <button className="upload-button" onClick={handleSend}>
-                        Upload
-                    </button>
+
 
                     {images.length > 0 &&
                         images.map((img, index) => (
@@ -198,10 +219,22 @@ const Upload = () => {
                     </div>
                 </div>
 
-                {/* sample 3D Image */}
-                <div className="example-image-container">
-                    <img src={threedimage} alt="Example 3D Model" className="example-3d-image" />
+                {/* Drag and Drop Area */}
+                <div
+                    className="drag-drop-area"
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                >
+                    <p>Drag & Drop your files here or click the Upload button above</p>
                 </div>
+                    <button className="upload-button" onClick={handleSend}>
+                        Upload
+                    </button>
+                {/* sample 3D Image */}
+                {/* <div className="example-image-container">
+                    <img src={threedimage} alt="Example 3D Model" className="example-3d-image" />
+                </div> */}
             </div>
 
             {/* scroll down arrow */}
