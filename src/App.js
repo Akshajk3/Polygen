@@ -43,11 +43,9 @@ function App() {
   let routesElement = useRoutes(routesArray);
   return (
     <div className="App">
-      <Navbar />
       <AuthProvider>
-        {/* <Login/> */}
+        <Navbar />
         <div>{routesElement}</div>
-
       </AuthProvider>
     </div>
   );

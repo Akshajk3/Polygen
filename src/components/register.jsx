@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Navigate, Link, useNavigate } from 'react-router-dom'
+import { Navigate, Link, useNavigate, useRouteError } from 'react-router-dom'
 import { useAuth, userLoggedIn } from '../context/AuthContext'
 import { doCreateUserWithEmailAndPassword } from '../auth'
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../auth'
@@ -17,6 +17,7 @@ const Register = () => {
 
     const { userLoggedIn } = useAuth()
 
+    console.log(userLoggedIn);
 
     const onSubmit = async (e) => {
         e.preventDefault()

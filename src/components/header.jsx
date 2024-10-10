@@ -6,7 +6,9 @@ import { auth } from '../firebase'
 
 const Header = () => {
     const navigate = useNavigate()
-    const userLoggedIn = useAuth()
+    const { userLoggedIn } = useAuth()
+
+    console.log(userLoggedIn);
 
     const handleLogout = async () => {
         await doSignOut(auth);
