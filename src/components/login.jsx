@@ -33,8 +33,7 @@ const Login = () => {
     return (
         <div className='formContainer'>
             {userLoggedIn && (<Navigate to={'/upload'} replace={true} />)}
-            <div className='shape'></div>
-            <div className='shape'></div>
+            <div className='auth-blob'></div>
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet"></link>
     
             <div className='formWrapper'>
@@ -74,7 +73,7 @@ const Login = () => {
 
                 </form>
 
-                <p className="smalltext">Don't have an account? <Link to={'/register'} className="">Sign up</Link></p>
+                <p className="smalltext">Don't have an account? <Link to={'/register'} className="auth-link">Sign up</Link></p>
 
                 <button
                         disabled={isSigningIn}

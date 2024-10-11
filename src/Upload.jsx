@@ -4,6 +4,8 @@ import { v4 as uuid } from "uuid";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import Attach from "./img/paper-clip.png";
 import threedimage from "./img/3dimage.jpg";
+import stepOne from "./img/Step One.png";
+import stepTwo from "./img/StepTwo.png";
 
 const Upload = () => {
     const [images, setImages] = useState([]);
@@ -11,7 +13,7 @@ const Upload = () => {
     const [statusMessage, setStatusMessage] = useState("");
     const [checkInterval, setCheckInterval] = useState(null);
     const [notified, setNotified] = useState(false);
-    const webhookURL = "https://f16a-34-173-65-12.ngrok-free.app/webhook"; // Your Colab notebook webhook URL
+    const webhookURL = "https://5941-35-221-174-149.ngrok-free.app/webhook"; // Your Colab notebook webhook URL
 
     const handleSend = async () => {
         if (images.length === 0) {
@@ -246,9 +248,12 @@ const Upload = () => {
                                 Ensure that you capture images from different angles for the best results.
                                 Clear, well-lit images will improve the accuracy of the 3D model.
                             </p>
+                            <strong>
+                            <a href="./images.zip" download>Example Dataset</a>
+                            </strong>
                         </p>
                     </div>
-                    <img src={threedimage} alt="Step 1" className="slanted-image" />
+                    <img src={stepOne} alt="Step 1" className="slanted-image" />
                 </div>
 
                 <div className="instruction-step alternate">
@@ -263,7 +268,7 @@ const Upload = () => {
                             </p>
                         </p>
                     </div>
-                    <img src={threedimage} alt="Step 2" className="slanted-image" />
+                    <img src={stepTwo} alt="Step 2" className="slanted-image" />
                 </div>
 
                 <div className="instruction-step">

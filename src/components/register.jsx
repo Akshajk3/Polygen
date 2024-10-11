@@ -41,9 +41,9 @@ const Register = () => {
 
         <div className='formContainer'>
             {userLoggedIn && (<Navigate to={'/upload'} replace={true} />)}
-            <div className='shape'></div> 
+            {/* <div className="auth-blob"></div> */}
             {/* change these colors and shapes to like squares */}
-            <div className='shape'></div>
+            <div className='auth-blob'></div>
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet"></link>
     
             <div className='formWrapper2'>
@@ -97,7 +97,7 @@ const Register = () => {
 
                 </form>
 
-                <p className="smalltext">Already have an account? {'   '}<Link to={'/login'} className="">Log In</Link></p>
+                <p className="smalltext">Already have an account? {'   '}<Link to={'/login'} className="auth-link">Log In</Link></p>
 
                 <button
                         disabled={isRegistering}

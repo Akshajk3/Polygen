@@ -21,13 +21,46 @@
 
 
 .formContainer{
-    background-color: #080710;
+    background-color: rgba(0, 38, 77, 0.85); /* Semi-transparent for glass effect */
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    padding: 30px; /* Add padding for spacing */
+    backdrop-filter: blur(10px); /* Glass effect */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Shadow effect */
+
+    .auth-blob {
+        position: absolute;
+        width: 400px; /* Adjust size */
+        height: 400px; /* Adjust size */
+        background: linear-gradient(
+            180deg,
+            rgba(47, 184, 255, 0.42) 31.77%,
+            #5c9df1 100%
+        );
+        mix-blend-mode: color-dodge;
+        animation: move 25s infinite alternate;
+        transition: 1s cubic-bezier(0.07, 0.8, 0.16, 1);
+        z-index: -1;
+        bottom: 20%; /* Position it lower */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Center the blob */
+    }
+    
+    .auth-blob:hover {
+        width: 420px;
+        height: 420px;
+        filter: blur(30px);
+        box-shadow:
+            inset 0 0 0 5px rgba(255, 255, 255, 0.6),
+            inset 100px 100px 0 0px #fa709a,
+            inset 200px 200px 0 0px #784ba8,
+            inset 300px 300px 0 0px #2b86c5;
+    }
 
     .shape{
         height: 200px;
@@ -78,7 +111,12 @@
         }
         
         .smalltext { 
+            color: plum;
             font-size: 16px;
+        }
+
+        .auth-link {
+            color: rgb(246, 227, 246);
         }
 
         .google-signin-btn {
@@ -117,6 +155,7 @@
         align-items: center;
     }
         .formlabel {
+            color: #d0a7ff; /* A light pastel shade */
             display: block;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -137,13 +176,13 @@
         }
 
         .logo{
-            color: rgb(125, 85, 199);
+            color: #f0f0f0;
             font-weight: bold;
             font-size: 24px;
         }
 
         .title{
-            color: rgb(86, 70, 226);
+            color: #f0f0f0;
             font-weight: bold;
             font-size: 12px;
         }
@@ -219,7 +258,12 @@
         }
         
         .smalltext { 
+            color: plum;
             font-size: 16px;
+        }
+
+        .auth-link {
+            color: rgb(246, 227, 246);
         }
 
         .google-signin-btn {
@@ -257,7 +301,9 @@
         gap: 10px;
         align-items: center;
     }
+
         .formlabel {
+            color: #d0a7ff; /* A light pastel shade */
             display: block;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -269,22 +315,23 @@
             display: block;
             height: 50px;
             width: 100%;
-            background-color: rgba(0,0,0,0.07);
+            background-color: rgba(255, 255, 255, 0.1); /* Light background for input */
             border-radius: 3px;
             padding: 0 10px;
             margin-top: 15px;
             font-size: 14px;
             font-weight: 300;
+            color: #f0f0f0; /* Text color for input */
         }
 
         .logo{
-            color: rgb(125, 85, 199);
+            color: #f0f0f0;
             font-weight: bold;
             font-size: 24px;
         }
 
-        .title{
-            color: rgb(86, 70, 226);
+        .title {
+            color: #f0f0f0; /* Match upload page */
             font-weight: bold;
             font-size: 12px;
         }
@@ -304,9 +351,9 @@
             }
             }
 
-            button{
-                background-color: #a251ff;
-                color: white;
+            button {
+                background-color: #a251ff; /* Button background */
+                color: #fff; /* White text for contrast */
                 padding: 10px;
                 font-weight: bold;
                 border: none;
@@ -342,7 +389,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    // padding: 20px 10%
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensure even spacing between items */
+    height: 80px;
+    padding: 0 2rem;
+    background-color: slategray;
+    color: slategray;
 
     z-index: 100;
     display: flex;
@@ -357,7 +411,7 @@
 
     .nav a {
         margin: 0 1rem;
-	    color: rgb(10, 10, 61);
+	    color: rgb(255, 255, 255);
 	    text-decoration: none;
     }
 
@@ -371,18 +425,47 @@
         
     }
 
-    .navlink {
+    .navlink-a {
         font-size: 1.4rem;
         display: block;
         color: white;
         text-align: right;
-        padding: 14px 16px;
+        padding: 14px;
+        text-decoration: none;
+        float: right;
+        padding-left: 30px;
+    }
+    .navlink-b {
+        font-size: 1.4rem;
+        display: block;
+        color: white;
+        text-align: right;
+        padding: 14px;
         text-decoration: none;
         float: right;
     }
-    // .logoimg {
 
-    // }
+    .navlink-logout {
+        font-size: 1.4rem;
+        color: white; /* Button text color */
+        background-color: rgb(0, 38, 77); /* Button background color */
+        text-align: center; /* Center the text */
+        padding: 10px 20px; /* Button padding */
+        text-decoration: none; /* Remove underline */
+        border: none; /* Remove border */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Change cursor on hover */
+    }
+    
+    .navlink-logout:hover {
+        background-color: rgb(0, 50, 100); /* Darker shade on hover */
+    }
+
+    .logoimg {
+        height: 50.625px;
+        width: 77.125px;
+        border-radius: 8px;
+    }
 }
 
 .input{
@@ -434,6 +517,7 @@ body {
 }
 
 .info-text {
+    padding: 20px 2rem;
     font-size: 2rem;
     margin-bottom: 25px;
     span {
@@ -479,7 +563,7 @@ body {
 
 .upload-button, .download-button {
     background-color: #87CEEB;
-    color: white;
+    color: whitesmoke;
     padding: 15px 30px;
     border: none;
     border-radius: 5px;
@@ -505,6 +589,7 @@ body {
     font-size: 1.2rem;
     color: #ddd;
     margin-top: 15px;
+    font-weight: 1000;
 }
 
 .drag-drop-area {

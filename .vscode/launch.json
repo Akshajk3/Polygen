@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/akshajkanumuri/Documents/GitHub/OpenCV-C-",
+      "program": "/Users/akshajkanumuri/Documents/GitHub/OpenCV-C-/build/Debug/outDebug"
+    }
+  ]
+}
