@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { storage } from "./firebase";
 import { v4 as uuid } from "uuid";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
-import Attach from "./img/paper-clip.png";
-import threedimage from "./img/3dimage.jpg";
 import stepOne from "./img/Step One.png";
 import stepTwo from "./img/StepTwo.png";
+import stepThree from "./img/StepThree.png"
 
 const Upload = () => {
     const [images, setImages] = useState([]);
@@ -283,7 +282,7 @@ const Upload = () => {
                             </p>
                         </p>
                     </div>
-                    <img src={threedimage} alt="Step 3" className="slanted-image" />
+                    <img src={stepThree} alt="Step 3" className="slanted-image" />
                 </div>
             </div>
         </div>
