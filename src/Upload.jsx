@@ -239,7 +239,7 @@ const Upload = () => {
 
                 <div className="instruction-step">
                     <div className="step-text">
-                        <h3>Step 1</h3>
+                        <h3>Step 1:</h3>
                         <p>
                             <strong>Upload High-Quality Images:</strong>
                             <p>
@@ -257,7 +257,7 @@ const Upload = () => {
 
                 <div className="instruction-step alternate">
                     <div className="step-text">
-                        <h3>Step 2</h3>
+                        <h3>Step 2:</h3>
                         <p>
                             <strong>Wait for the 3D Model to Generate:</strong>
                             <p>   
@@ -272,7 +272,7 @@ const Upload = () => {
 
                 <div className="instruction-step">
                     <div className="step-text">
-                        <h3>Step 3</h3>
+                        <h3>Step 3:</h3>
                         <p>
                             <strong>Download Your 3D Model:</strong>
                             <p>

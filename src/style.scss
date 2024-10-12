@@ -392,81 +392,54 @@
     z-index: 100;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Ensure even spacing between items */
+    justify-content: space-between;
     height: 80px;
     padding: 0 2rem;
-    background-color: slategray;
+    background-color: rgba(0, 38, 77, 0.0); /* Set transparency */
     color: slategray;
-
-    z-index: 100;
-    display: flex;
-	align-items: center;
-	justify-content: space-between;
-	height: 80px;
-	padding: 0 2rem;
-	background-color: slategray;
-	color: slategray;
-
-
-
-    .nav a {
-        margin: 0 1rem;
-	    color: rgb(255, 255, 255);
-	    text-decoration: none;
-    }
-
-    .nav a:hover {
-        color: gray;
-    }
-
-    nav {
-        display: flex;
-        align-items: center;
-        
-    }
-
-    .navlink-a {
-        font-size: 1.4rem;
-        display: block;
-        color: white;
-        text-align: right;
-        padding: 14px;
-        text-decoration: none;
-        float: right;
-        padding-left: 30px;
-    }
-    .navlink-b {
-        font-size: 1.4rem;
-        display: block;
-        color: white;
-        text-align: right;
-        padding: 14px;
-        text-decoration: none;
-        float: right;
-    }
-
-    .navlink-logout {
-        font-size: 1.4rem;
-        color: white; /* Button text color */
-        background-color: rgb(0, 38, 77); /* Button background color */
-        text-align: center; /* Center the text */
-        padding: 10px 20px; /* Button padding */
-        text-decoration: none; /* Remove underline */
-        border: none; /* Remove border */
-        border-radius: 5px; /* Rounded corners */
-        cursor: pointer; /* Change cursor on hover */
-    }
-    
-    .navlink-logout:hover {
-        background-color: rgb(0, 50, 100); /* Darker shade on hover */
-    }
-
-    .logoimg {
-        height: 50.625px;
-        width: 77.125px;
-        border-radius: 8px;
-    }
+    transition: backdrop-filter 0.3s ease-in-out; /* Smooth transition */
 }
+
+.nav-blur {
+    backdrop-filter: blur(20px); /* Apply blur effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+/* Rest of your CSS */
+.nav a {
+    margin: 0 1rem;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.nav a:hover {
+    color: gray;
+}
+
+.navlink-a, .navlink-b, .navlink-logout {
+    font-size: 1.4rem;
+    color: white;
+    text-decoration: none;
+}
+
+.navlink-logout {
+    background-color: rgb(0, 38, 77);
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navlink-logout:hover {
+    background-color: rgb(0, 50, 100);
+}
+
+.logoimg {
+    width: 147.48px;
+    height: 48.6px;
+    border-radius: 8px;
+}
+
 
 .input{
     background-color: #080710;
@@ -540,18 +513,20 @@ body {
     font-size: 1rem;
     border: 2px solid #87CEEB;
     border-radius: 8px;
-    background-color: rgba(240, 248, 255, 0.85); /* Semi-transparent for glass effect */
-    color: #333;
+    background-color: rgba(47, 184, 255, 0.42); /* Semi-transparent for glass effect */
+    color: whitesmoke;
     cursor: pointer;
     transition: all 0.3s ease;
     display: block;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 
     &:hover {
         background-color: rgba(224, 247, 255, 0.9);
         border-color: #63c0e8;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        color: slategray;
     }
 
     &:focus {
@@ -562,7 +537,7 @@ body {
 }
 
 .upload-button, .download-button {
-    background-color: #87CEEB;
+    background-color: rgba(47, 184, 255, 0.42);
     color: whitesmoke;
     padding: 15px 30px;
     border: none;
@@ -633,7 +608,7 @@ body {
 
 /* Instructions Section */
 .instructions-section {
-    background-color: rgba(240, 248, 255, 0.85);
+    background-color: whitesmoke;
     padding: 50px 20px;
     width: 100%;
     text-align: center;
@@ -648,6 +623,7 @@ body {
     margin-bottom: 30px;
     text-align: center;
     align-items: center;
+    color: rgba(0, 38, 77, 0.85);
 }
 
 .instruction-step {
@@ -662,11 +638,11 @@ body {
         h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
-            color: #333;
+            color: rgba(0, 38, 77, 0.85);
         }
         p {
             font-size: 1.2rem;
-            color: #333;
+            color: rgba(0, 38, 77, 0.85);
         }
     }
 
@@ -680,7 +656,7 @@ body {
 
 .alternate .step-text {
     order: 2;
-    text-align: right;
+    text-align: left;
 }
 
 /* Animated Blob */
