@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import * as THREE from 'three';
 import { OBJLoader, OrbitControls } from 'three-stdlib';
+import kay from "../img/kayoncomp.jpeg"
+import aki from "../img/aki.jpeg"
 
 const Home = () => {
     const { currentUser } = useAuth();
@@ -68,7 +70,8 @@ const Home = () => {
                     <source src="sampleclip.mp4" type="video/mp4" />
                 </video>
                 <div className="hero-content">
-                    <h1 className="hero-title">Polygen</h1>
+                    {/* <h1 className="hero-title">Polygen</h1> */}
+                    <img src="polygen.png" alt="Logo" className="heroimg" />
                     <p className="hero-subtitle">Making your imagination reality</p>
                     <button className="start-button" onClick={handleStartGenerating}>Start Generating</button>
                 </div>
@@ -100,7 +103,7 @@ const Home = () => {
                 <h2>Credits</h2>
                 <div className="credits-container">
                     <div className="credit-item">
-                        <img src="person1.jpg" alt="Person 1" className="credit-image" />
+                        <img src={kay} alt="Person 1" className="credit-image" />
                         <div className="credit-details">
                             <h3>Kshitij Singhal</h3>
                             <p>iamkay556@gmail.com</p>
@@ -108,7 +111,7 @@ const Home = () => {
                     </div>
 
                     <div className="credit-item">
-                        <img src="person2.jpg" alt="Person 2" className="credit-image" />
+                        <img src={aki} alt="Person 2" className="credit-image" />
                         <div className="credit-details">
                             <h3>Akshaj Kanumuri</h3>
                             <p>akshaj.kanumuri@gmail.com</p>

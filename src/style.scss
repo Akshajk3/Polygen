@@ -18,79 +18,73 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-
-
-.formContainer{
-    background-color: rgba(0, 38, 77, 0.85); /* Semi-transparent for glass effect */
+.formContainer {
+    background-color: rgba(0, 38, 77, 0.85); /* Dark Blue */
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 30px; /* Add padding for spacing */
-    backdrop-filter: blur(10px); /* Glass effect */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Shadow effect */
+    padding: 30px;
+    backdrop-filter: blur(10px); 
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); 
 
     .auth-blob {
         position: absolute;
-        width: 400px; /* Adjust size */
-        height: 400px; /* Adjust size */
+        width: 400px; 
+        height: 400px;
         background: linear-gradient(
             180deg,
-            rgba(47, 184, 255, 0.42) 31.77%,
-            #5c9df1 100%
+            rgba(38, 166, 91, 0.42) 31.77%, /* Seafoam Green */
+            #5dbb9d 100%
         );
         mix-blend-mode: color-dodge;
         animation: move 25s infinite alternate;
         transition: 1s cubic-bezier(0.07, 0.8, 0.16, 1);
         z-index: -1;
-        bottom: 20%; /* Position it lower */
-        left: 50%; /* Center horizontally */
-        transform: translateX(-50%); /* Center the blob */
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%);
     }
-    
+
     .auth-blob:hover {
         width: 420px;
         height: 420px;
         filter: blur(30px);
         box-shadow:
             inset 0 0 0 5px rgba(255, 255, 255, 0.6),
-            inset 100px 100px 0 0px #fa709a,
-            inset 200px 200px 0 0px #784ba8,
+            inset 100px 100px 0 0px #38a6ac,
+            inset 200px 200px 0 0px #184f8d,
             inset 300px 300px 0 0px #2b86c5;
     }
 
-    .shape{
+    .shape {
         height: 200px;
         width: 200px;
         position: absolute;
         border-radius: 50%;
     }
-    .shape:nth-child(1){
-        background: linear-gradient(
-            #1845ad,
-            #23a2f6
-        );
+
+    .shape:nth-child(1) {
+        background: linear-gradient(#12264c, #193963); /* Dark Blue */
         left: 600px;
         top: 200px;
     }
-    .shape:nth-child(2){
-        background: linear-gradient(
-            #f84724,
-            #f09819
-        );
+
+    .shape:nth-child(2) {
+        background: linear-gradient(#17b089, #28a07c); /* Seafoam Green */
         right: 630px;
         bottom: 80px;
     }
 
-    .formWrapper2{
+    .formWrapper2 {
         height: 630px;
         width: 400px;
-        background-color: rgba(255,255,255,0.13);
+        background-color: rgba(255, 255, 255, 0.13);
         position: absolute;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         top: 55%;
         flex-direction: column;
         gap: 10px;
@@ -99,63 +93,65 @@
         left: 50%;
         border-radius: 10px;
         backdrop-filter: blur(10px);
-        border: 2px solid rgba(255,255,255,0.1);
-        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
         padding: 50px 35px;
 
         .logo {
-        font-size: 32px;
-        font-weight: 500;
-        line-height: 42px;
-        text-align: center;
+            font-size: 25px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+            color: #f0f0f0; /* Lightgrayish Blue */
         }
-        
-        .smalltext { 
-            color: plum;
+
+        .smalltext {
+            color: #b0c6de; /* Lightgrayish Blue */
             font-size: 16px;
         }
 
         .auth-link {
-            color: rgb(246, 227, 246);
+            color: #b0c6de; /* Lightgrayish Blue */
         }
 
         .google-signin-btn {
             display: flex;
-        align-items: center;
-        background-color: white;
-        color: #4285F4;
-        border: 1px solid #d0a7ff;
-        border-radius: 5px;
-        padding: 8px 16px;
-        font-weight: bold;
-        cursor: pointer;
-        gap: 10px;
+            align-items: center;
+            background-color: white;
+            color: #28a07c; /* Seafoam Green */
+            border: 1px solid #b0c6de;
+            border-radius: 5px;
+            padding: 8px 16px;
+            font-weight: bold;
+            cursor: pointer;
+            gap: 10px;
         }
+
         .google-signin-icon {
-            width: 24px;  /* Set the width of the Google icon */
-            height: 24px; /* Set the height of the Google icon */
+            width: 24px;
+            height: 24px;
         }
 
+        .formlogin {
+            height: 520px;
+            width: 400px;
+            background-color: rgba(38, 166, 91, 0.842); /* Seafoam Green */
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            display: flex;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+            gap: 10px;
+            align-items: center;
+        }
 
-        .formlogin{
-        height: 520px;
-        width: 400px;
-        background-color: rgba(58, 207, 108, 0.842);
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        display: flex;
-        border-radius: 10px;
-        backdrop-filter: blur(10px);
-        border: 2px solid rgba(255,255,255,0.1);
-        box-shadow: 0 0 40px rgba(8,7,16,0.6);
-        padding: 50px 35px;
-        gap: 10px;
-        align-items: center;
-    }
         .formlabel {
-            color: #d0a7ff; /* A light pastel shade */
+            color: #b0c6de; /* Lightgrayish Blue */
             display: block;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -167,7 +163,7 @@
             display: block;
             height: 50px;
             width: 100%;
-            background-color: rgba(0,0,0,0.07);
+            background-color: rgba(0, 0, 0, 0.07);
             border-radius: 3px;
             padding: 0 10px;
             margin-top: 15px;
@@ -175,35 +171,24 @@
             font-weight: 300;
         }
 
-        .logo{
-            color: #f0f0f0;
-            font-weight: bold;
-            font-size: 24px;
-        }
-
-        .title{
-            color: #f0f0f0;
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        form{
+        form {
             display: flex;
             flex-direction: column;
             gap: 15px;
 
-            input{
+            input {
                 padding: 15px;
                 border: none;
-                border-bottom: 1px solid #d0a7ff;
+                border-bottom: 1px solid #28a07c; /* Seafoam Green */
                 width: 250px;
-            &::placeholder{
-                color: rgba($color: #6e426c, $alpha: 0.4);
-            }
+
+                &::placeholder {
+                    color: rgba(184, 207, 196, 0.4);
+                }
             }
 
-            button{
-                background-color: #a251ff;
+            button {
+                background-color: #12325c; /* Dark Blue */
                 color: white;
                 padding: 10px;
                 font-weight: bold;
@@ -211,33 +196,33 @@
                 cursor: pointer;
             }
 
-            label{
+            label {
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                color: #d0a7ff;
+                color: #28a07c; /* Seafoam Green */
                 font-size: 14px;
                 cursor: pointer;
 
-                img{
+                img {
                     width: 40px;
                 }
             }
         }
 
-        p{
-            color: #6e426c;
+        p {
+            color: #b0c6de; /* Lightgrayish Blue */
             font-size: 12px;
             margin-top: 10px;
         }
     }
 
-    .formWrapper{
+    .formWrapper {
         height: 550px;
         width: 400px;
-        background-color: rgba(255,255,255,0.13);
+        background-color: rgba(255, 255, 255, 0.13);
         position: absolute;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         top: 55%;
         flex-direction: column;
         gap: 10px;
@@ -246,64 +231,65 @@
         left: 50%;
         border-radius: 10px;
         backdrop-filter: blur(10px);
-        border: 2px solid rgba(255,255,255,0.1);
-        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
         padding: 50px 35px;
 
         .logo {
-        font-size: 32px;
-        font-weight: 500;
-        line-height: 42px;
-        text-align: center;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+            color: #f0f0f0; /* Lightgrayish Blue */
         }
-        
-        .smalltext { 
-            color: plum;
+
+        .smalltext {
+            color: #b0c6de; /* Lightgrayish Blue */
             font-size: 16px;
         }
 
         .auth-link {
-            color: rgb(246, 227, 246);
+            color: #b0c6de; /* Lightgrayish Blue */
         }
 
         .google-signin-btn {
             display: flex;
-        align-items: center;
-        background-color: white;
-        color: #4285F4;
-        border: 1px solid #d0a7ff;
-        border-radius: 5px;
-        padding: 8px 16px;
-        font-weight: bold;
-        cursor: pointer;
-        gap: 10px;
+            align-items: center;
+            background-color: white;
+            color: #28a07c; /* Seafoam Green */
+            border: 1px solid #b0c6de;
+            border-radius: 5px;
+            padding: 8px 16px;
+            font-weight: bold;
+            cursor: pointer;
+            gap: 10px;
         }
+
         .google-signin-icon {
-            width: 24px;  /* Set the width of the Google icon */
-            height: 24px; /* Set the height of the Google icon */
+            width: 24px;
+            height: 24px;
         }
 
-
-        .formlogin{
-        height: 520px;
-        width: 400px;
-        background-color: rgba(58, 207, 108, 0.842);
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        display: flex;
-        border-radius: 10px;
-        backdrop-filter: blur(10px);
-        border: 2px solid rgba(255,255,255,0.1);
-        box-shadow: 0 0 40px rgba(8,7,16,0.6);
-        padding: 50px 35px;
-        gap: 10px;
-        align-items: center;
-    }
+        .formlogin {
+            height: 520px;
+            width: 400px;
+            background-color: rgba(38, 166, 91, 0.842); /* Seafoam Green */
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            display: flex;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+            gap: 10px;
+            align-items: center;
+        }
 
         .formlabel {
-            color: #d0a7ff; /* A light pastel shade */
+            color: #b0c6de; /* Lightgrayish Blue */
             display: block;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -315,74 +301,73 @@
             display: block;
             height: 50px;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.1); /* Light background for input */
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 3px;
             padding: 0 10px;
             margin-top: 15px;
             font-size: 14px;
             font-weight: 300;
-            color: #f0f0f0; /* Text color for input */
+            color: #f0f0f0; /* Lightgrayish Blue */
         }
 
-        .logo{
-            color: #f0f0f0;
+        .logo {
+            color: #f0f0f0; /* Lightgrayish Blue */
             font-weight: bold;
             font-size: 24px;
         }
 
         .title {
-            color: #f0f0f0; /* Match upload page */
+            color: #f0f0f0; /* Lightgrayish Blue */
             font-weight: bold;
             font-size: 12px;
         }
 
-        form{
+        form {
             display: flex;
             flex-direction: column;
             gap: 15px;
 
-            input{
+            input {
                 padding: 15px;
                 border: none;
-                border-bottom: 1px solid #d0a7ff;
+                border-bottom: 1px solid #28a07c;
                 width: 250px;
-            &::placeholder{
-                color: rgba($color: #6e426c, $alpha: 0.4);
-            }
+
+                &::placeholder {
+                    color: rgba(184, 207, 196, 0.4);
+                }
             }
 
             button {
-                background-color: #a251ff; /* Button background */
-                color: #fff; /* White text for contrast */
+                background-color: #12325c; /* Dark Blue */
+                color: white;
                 padding: 10px;
                 font-weight: bold;
                 border: none;
                 cursor: pointer;
             }
 
-            label{
+            label {
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                color: #d0a7ff;
+                color: #28a07c; /* Seafoam Green */
                 font-size: 14px;
                 cursor: pointer;
 
-                img{
+                img {
                     width: 40px;
                 }
             }
         }
 
-        p{
-            color: #6e426c;
+        p {
+            color: #b0c6de; /* Lightgrayish Blue */
             font-size: 12px;
             margin-top: 10px;
         }
     }
 }
-
-
 
 .headernav {
     position: fixed;
@@ -395,20 +380,19 @@
     justify-content: space-between;
     height: 80px;
     padding: 0 2rem;
-    background-color: rgba(0, 38, 77, 0.0); /* Set transparency */
-    color: slategray;
-    transition: backdrop-filter 0.3s ease-in-out; /* Smooth transition */
+    background-color: rgba(0, 38, 77, 0); /* Dark Blue */
+    color: #b0c6de; /* Lightgrayish Blue */
+    transition: backdrop-filter 0.3s ease-in-out;
 }
 
 .nav-blur {
-    backdrop-filter: blur(20px); /* Apply blur effect */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Rest of your CSS */
 .nav a {
     margin: 0 1rem;
-    color: rgb(255, 255, 255);
+    color: #b0c6de; /* Lightgrayish Blue */
     text-decoration: none;
 }
 
@@ -416,14 +400,16 @@
     color: gray;
 }
 
-.navlink-a, .navlink-b, .navlink-logout {
+.navlink-a,
+.navlink-b,
+.navlink-logout {
     font-size: 1.4rem;
     color: white;
     text-decoration: none;
 }
 
 .navlink-logout {
-    background-color: rgb(0, 38, 77);
+    background-color: #12325c; /* Dark Blue */
     padding: 8px 20px;
     border: none;
     border-radius: 5px;
@@ -431,7 +417,7 @@
 }
 
 .navlink-logout:hover {
-    background-color: rgb(0, 50, 100);
+    background-color: #0a1f3d; /* Darker Blue */
 }
 
 .logoimg {
@@ -440,9 +426,8 @@
     border-radius: 8px;
 }
 
-
-.input{
-    background-color: #080710;
+.input {
+    background-color: #12325c; /* Dark Blue */
     height: 100vh;
     display: flex;
     align-items: center;
@@ -454,32 +439,29 @@
         padding: 5px;
         width: 50px;
     }
-
-
 }
 
-/* General Styling */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1f1f47;
+    background-color: #12325c; /* Dark Blue */
 }
 
 .upload-page {
-    background-color: rgba(0, 38, 77, 0.85); /* Semi-transparent for glass effect */
+    background-color: rgba(0, 38, 77, 0.85); /* Dark Blue */
     padding: 30px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    color: #f0f0f0;
+    color: #f0f0f0; /* Lightgrayish Blue */
     backdrop-filter: blur(10px);
     border-radius: 15px;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    position: relative; /* For positioning the blob */
-    overflow: hidden; /* To contain the blob animation */
+    position: relative;
+    overflow: hidden;
 }
 
 .input-container {
@@ -493,9 +475,10 @@ body {
     padding: 20px 2rem;
     font-size: 2rem;
     margin-bottom: 25px;
+
     span {
         font-weight: bold;
-        color: #87CEEB;
+        color: #28a07c; /* Seafoam Green */
     }
 }
 
@@ -511,9 +494,9 @@ body {
     max-width: 300px;
     padding: 12px 20px;
     font-size: 1rem;
-    border: 2px solid #87CEEB;
+    border: 2px solid #28a07c; /* Seafoam Green */
     border-radius: 8px;
-    background-color: rgba(47, 184, 255, 0.42); /* Semi-transparent for glass effect */
+    background-color: rgba(38, 166, 91, 0.42); /* Seafoam Green */
     color: whitesmoke;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -521,7 +504,6 @@ body {
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    
 
     &:hover {
         background-color: rgba(224, 247, 255, 0.9);
@@ -537,8 +519,9 @@ body {
     }
 }
 
-.upload-button, .download-button {
-    background-color: rgba(47, 184, 255, 0.42);
+.upload-button,
+.download-button {
+    background-color: rgba(38, 166, 91, 0.42); /* Seafoam Green */
     color: whitesmoke;
     padding: 15px 30px;
     border: none;
@@ -561,7 +544,8 @@ body {
     border-radius: 8px;
 }
 
-.status-message, .extra-info {
+.status-message,
+.extra-info {
     font-size: 1.2rem;
     color: #ddd;
     margin-top: 15px;
@@ -572,7 +556,7 @@ body {
     width: 100%;
     max-width: 800px;
     height: 200px;
-    border: 2px dashed #87CEEB;
+    border: 2px dashed #28a07c; /* Seafoam Green */
     border-radius: 8px;
     display: flex;
     justify-content: center;
@@ -580,11 +564,11 @@ body {
     margin-top: 30px;
     transition: background-color 0.3s;
     margin-bottom: 30px;
-    background: rgba(0, 38, 77, 0.15); /* Semi-transparent */
+    background: rgba(0, 38, 77, 0.15); /* Dark Blue */
 
     p {
         font-size: 1.2rem;
-        color: #f0f0f0;
+        color: #f0f0f0; /* Lightgrayish Blue */
     }
 
     &.drag-over {
@@ -595,7 +579,7 @@ body {
 .scroll-down-arrow {
     cursor: pointer;
     font-size: 3rem;
-    color: #f0f0f0;
+    color: #f0f0f0; /* Lightgrayish Blue */
     position: absolute;
     bottom: 10px;
     left: 50%;
@@ -607,7 +591,6 @@ body {
     }
 }
 
-/* Instructions Section */
 .instructions-section {
     background-color: whitesmoke;
     padding: 50px 20px;
@@ -624,7 +607,7 @@ body {
     margin-bottom: 30px;
     text-align: center;
     align-items: center;
-    color: rgba(0, 38, 77, 0.85);
+    color: rgba(0, 38, 77, 0.85); /* Dark Blue */
 }
 
 .instruction-step {
@@ -636,14 +619,16 @@ body {
 
     .step-text {
         width: 50%;
+
         h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
-            color: rgba(0, 38, 77, 0.85);
+            color: rgba(0, 38, 77, 0.85); /* Dark Blue */
         }
+
         p {
             font-size: 1.2rem;
-            color: rgba(0, 38, 77, 0.85);
+            color: rgba(0, 38, 77, 0.85); /* Dark Blue */
         }
     }
 
@@ -660,15 +645,14 @@ body {
     text-align: left;
 }
 
-/* Animated Blob */
 .blob {
     position: absolute;
     width: 500px;
     height: 500px;
     background: linear-gradient(
         180deg,
-        rgba(47, 184, 255, 0.42) 31.77%,
-        #5c9df1 100%
+        rgba(38, 166, 91, 0.42) 31.77%, /* Seafoam Green */
+        #5dbb9d 100%
     );
     mix-blend-mode: color-dodge;
     animation: move 25s infinite alternate;
@@ -682,8 +666,8 @@ body {
     filter: blur(30px);
     box-shadow:
         inset 0 0 0 5px rgba(255, 255, 255, 0.6),
-        inset 100px 100px 0 0px #fa709a,
-        inset 200px 200px 0 0px #784ba8,
+        inset 100px 100px 0 0px #38a6ac,
+        inset 200px 200px 0 0px #184f8d,
         inset 300px 300px 0 0px #2b86c5;
 }
 
@@ -722,7 +706,6 @@ body {
     }
 }
 
-// --------------------------- home -----------------
 .homepage-container {
     font-family: 'Poppins', sans-serif;
     color: white;
@@ -733,7 +716,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        background: linear-gradient(135deg, #12264c, #1c3b5d, #234d6c); /* Dark Blue Gradient */
         overflow: hidden;
 
         .background-video {
@@ -750,15 +733,23 @@ body {
         .hero-content {
             position: relative;
             z-index: 2;
-            text-align: left;
+            text-align: center;
+            align-items: center;
             max-width: 700px;
-            color: #f0f0f0;
+            color: #f0f0f0; /* Lightgrayish Blue */
             animation: fadeIn 2s ease-in-out;
 
             h1.hero-title {
-                font-size: 5rem;
+                font-size: 7rem;
                 font-weight: 600;
+                margin-bottom: 15px;
                 text-shadow: 0px 0px 20px rgba(0, 255, 255, 0.7);
+            }
+
+            .heroimg {
+                width: 737.4px;
+                height: 243px;
+                margin-right: 10px;
             }
 
             p.hero-subtitle {
@@ -770,17 +761,18 @@ body {
             .start-button {
                 padding: 15px 30px;
                 font-size: 1.2rem;
-                background: linear-gradient(45deg, #e52e71, #ff8a00);
+                background: linear-gradient(45deg, #28a07c, #0a1f3d); /* Seafoam Green to Dark Blue */
                 border: none;
                 border-radius: 30px;
                 color: white;
                 cursor: pointer;
-                align-items: center ;
-                box-shadow: 0 5px 15px rgba(255, 138, 0, 0.3);
+                align-items: center;
+                box-shadow: 0 5px 15px rgba(47, 184, 255, 0.3); /* Seafoam Green */
                 transition: all 0.3s ease;
+
                 &:hover {
                     transform: scale(1.05);
-                    box-shadow: 0 5px 20px rgba(255, 138, 0, 0.5);
+                    box-shadow: 0 5px 20px rgba(38, 166, 91, 0.5); /* Seafoam Green */
                 }
             }
         }
@@ -790,12 +782,12 @@ body {
         padding: 60px 20px;
         text-align: center;
         background: #1c1c1c;
-        color: #f0f0f0;
+        color: #f0f0f0; /* Lightgrayish Blue */
 
         h2 {
             font-size: 2.5rem;
             margin-bottom: 40px;
-            text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.6);
+            text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.6); /* Blue shadow */
         }
 
         .video-container {
@@ -806,18 +798,19 @@ body {
             .tutorial-video {
                 width: 80%;
                 height: 400px;
-                border: 3px solid #ff8a00;
+                border: 3px solid #28a07c; /* Seafoam Green */
                 border-radius: 15px;
-                box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
+                box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5); /* Light blue glow */
             }
 
-            .left-design-element, .right-design-element {
+            .left-design-element,
+            .right-design-element {
                 width: 50px;
                 height: 50px;
-                background: #ff8a00;
+                background: #28a07c; /* Seafoam Green */
                 border-radius: 50%;
                 position: absolute;
-                box-shadow: 0 0 15px rgba(255, 138, 0, 0.6);
+                box-shadow: 0 0 15px rgba(38, 166, 91, 0.6);
             }
 
             .left-design-element {
@@ -835,30 +828,30 @@ body {
     .viewer-section {
         padding: 60px 20px;
         text-align: center;
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        color: #f0f0f0;
+        background: linear-gradient(135deg, #12264c, #1c3b5d, #234d6c); /* Dark Blue Gradient */
+        color: #f0f0f0; /* Lightgrayish Blue */
 
         h2 {
             font-size: 2.5rem;
             margin-bottom: 40px;
-            text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.6);
+            text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.6); /* Blue glow */
         }
 
         .model-viewer {
             width: 100%;
             height: 500px;
             background-color: #1c1c1c;
-            border: 3px solid #ff8a00;
+            border: 3px solid #28a07c; /* Seafoam Green */
             border-radius: 15px;
-            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
+            box-shadow: 0px 0px 15px rgba(38, 166, 91, 0.5); /* Seafoam Green */
         }
-
     }
 
     @keyframes fadeIn {
         0% {
             opacity: 0;
         }
+
         100% {
             opacity: 1;
         }
@@ -893,7 +886,7 @@ body {
             border-radius: 15px;
             box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
             max-width: 250px;
-            color: #f0f0f0;
+            color: #f0f0f0; /* Lightgrayish Blue */
 
             .credit-image {
                 width: 150px;
