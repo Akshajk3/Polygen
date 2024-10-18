@@ -78,7 +78,7 @@ const Home = () => {
             </section>
 
             {/*yt tut */}
-            <section className="tutorial-section">
+            {/* <section className="tutorial-section">
                 <h2>How to use Polygen</h2>
                 <div className="video-container">
                     <iframe
@@ -91,7 +91,7 @@ const Home = () => {
                     <div className="left-design-element"></div>
                     <div className="right-design-element"></div>
                 </div>
-            </section>
+            </section> */}
 
             {/* 3d model viewer */}
             <section className="viewer-section">
