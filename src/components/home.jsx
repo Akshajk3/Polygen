@@ -9,7 +9,7 @@ import aki from "../img/aki.jpeg"
 const Home = () => {
     const { currentUser } = useAuth();
     const navigate = useNavigate();
-    const viewerRef = useRef();
+    // const viewerRef = useRef();
 
     const handleStartGenerating = () => {
         if (currentUser) {
@@ -20,48 +20,48 @@ const Home = () => {
     };
 
     // setup Three.js 3D Model Viewer
-    useEffect(() => {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, viewerRef.current.clientWidth / viewerRef.current.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(viewerRef.current.clientWidth, viewerRef.current.clientHeight);
-    viewerRef.current.appendChild(renderer.domElement);
+//     useEffect(() => {
+//     const scene = new THREE.Scene();
+//     const camera = new THREE.PerspectiveCamera(75, viewerRef.current.clientWidth / viewerRef.current.clientHeight, 0.1, 1000);
+//     const renderer = new THREE.WebGLRenderer({ antialias: true });
+//     renderer.setSize(viewerRef.current.clientWidth, viewerRef.current.clientHeight);
+//     viewerRef.current.appendChild(renderer.domElement);
 
-    // add lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1); // soft white light
-    scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // more focused light
-    directionalLight.position.set(1, 1, 1);
-    scene.add(directionalLight);
+//     // add lighting
+//     const ambientLight = new THREE.AmbientLight(0xffffff, 1); // soft white light
+//     scene.add(ambientLight);
+//     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // more focused light
+//     directionalLight.position.set(1, 1, 1);
+//     scene.add(directionalLight);
 
-    // load the 3D model using OBJLoader
-    const loader = new OBJLoader();
-    loader.load('/dense.obj', (object) => {
-        object.scale.set(0.5, 0.5, 0.5);
-        scene.add(object);
-    }, undefined, (error) => {
-        console.error('Error loading the 3D model:', error);
-    });
+//     // load the 3D model using OBJLoader
+//     // const loader = new OBJLoader();
+//     // loader.load('/dense.obj', (object) => {
+//     //     object.scale.set(0.5, 0.5, 0.5);
+//     //     scene.add(object);
+//     // }, undefined, (error) => {
+//     //     console.error('Error loading the 3D model:', error);
+//     // });
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
+//     const controls = new OrbitControls(camera, renderer.domElement);
+//     controls.enableDamping = true;
+//     controls.dampingFactor = 0.05;
 
-    camera.position.z = 5;
+//     camera.position.z = 5;
 
-    const animate = () => {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-    };
-    animate();
+//     const animate = () => {
+//         requestAnimationFrame(animate);
+//         controls.update();
+//         renderer.render(scene, camera);
+//     };
+//     animate();
 
-    return () => {
-        if (viewerRef.current) {
-            viewerRef.current.removeChild(renderer.domElement);
-        }
-    };
-}, []);
+//     return () => {
+//         if (viewerRef.current) {
+//             viewerRef.current.removeChild(renderer.domElement);
+//         }
+//     };
+// }, []);
 
     return (
         <div className="homepage-container">
@@ -94,10 +94,10 @@ const Home = () => {
             </section> */}
 
             {/* 3d model viewer */}
-            <section className="viewer-section">
+            {/* <section className="viewer-section">
                 <h2>Sample 3D Model (Using a professional dataset) </h2>
                 <div ref={viewerRef} className="model-viewer"></div>
-            </section>
+            </section> */}
 
             <section className="credits-section">
                 <h2>Credits</h2>

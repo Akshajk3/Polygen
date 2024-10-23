@@ -12,7 +12,7 @@ const Upload = () => {
     const [statusMessage, setStatusMessage] = useState("");
     const [checkInterval, setCheckInterval] = useState(null);
     const [notified, setNotified] = useState(false);
-    const webhookURL = "https://5941-35-221-174-149.ngrok-free.app/webhook"; // Your Colab notebook webhook URL
+    const webhookURL = "https://8f36-34-16-147-134.ngrok-free.app/webhook";
 
     const handleSend = async () => {
         if (images.length === 0) {
@@ -84,7 +84,7 @@ const Upload = () => {
             }
         } catch (error) {
             console.error("Error uploading images or notifying server:", error);
-            setStatusMessage("Error during upload please try again.");
+            //setStatusMessage("Error during upload please try again.");
         }
     };
 
@@ -291,43 +291,3 @@ const Upload = () => {
 };
 
 export default Upload;
-
-{   // aki's original code (just for debugging)
-    
-    /* <div className="input">
-            <div style={{color: 'white'}}>this is text</div>
-            <div className="send" style={{ paddingTop: "300px", textAlign: "center" }}>
-                <input
-                    type="file"
-                    multiple
-                    style={{ display: "none" }}
-                    id="file"
-                    onChange={(e) => setImages([...e.target.files])}
-                />
-                <label htmlFor="file">
-                    {images.length > 0 ? (
-                        images.map((img, index) => (
-                            <img
-                                className=""
-                                key={index}
-                                src={URL.createObjectURL(img)}
-                                alt={`Selected ${index}`}
-                                style={{ width: 50, height: 50, marginRight: 5 }}
-                            />
-                        ))
-                    ) : (
-                        <img className="" src={Attach} alt="Attach" />
-                    )}
-                </label>
-                <button className="" onClick={handleSend}>Upload</button>
-                { done && (
-                <button onClick={downloadModels} style={{marginTop : '20px'}}>Download Models</button>
-                )}
-                <p>{statusMessage}</p>
-                <div style={{ color: 'white', paddingTop: "300px"}}>
-                    This is some really cool text and have some instructions or soemthing here.
-                    IDK Upload ur images make sure the images are good so you the stuff actually
-                    comes out good.
-                </div>
-            </div>
-        </div> */}
