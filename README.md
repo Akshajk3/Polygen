@@ -1,70 +1,81 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Polygen: 3D Model Generation from Images
 
-## Available Scripts
+**Polygen** is a web application that allows users to upload images and generate dense 3D models using photogrammetry techniques. The app is designed to make 3D model generation easy and accessible, transforming your 2D photos into 3D models with precision and speed.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Upload Images**: Upload a series of images from different angles of an object or scene.
+- **Automated 3D Model Generation**: Generate dense 3D models automatically using advanced photogrammetry (via PyCOLMAP).
+- **Download or View**: After the model is generated, you can download it in PLY or OBJ format.
+- **Fast and Secure**: Images are securely stored in Firebase, and model generation is performed on the server side for efficiency.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How It Works
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Upload**: Users upload multiple images to the platform.
+2. **Processing**: Polygen's server processes the images using PyCOLMAP to create a dense 3D reconstruction.
+3. **Results**: Users can download the resulting 3D model.
 
-### `npm test`
+## Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Frontend**: React with SCSS for styling.
+- **Backend**: Firebase for authentication and cloud storage.
+- **3D Model Processing**: PyCOLMAP for generating dense 3D models, and Open3D for mesh generation.
+- **Supported File Formats**: PLY, OBJ for downloading and viewing models.
 
-### `npm run build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ensure that you have the following installed:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Node.js
 
-### `npm run eject`
+### Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Clone the repository:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+git clone https://github.com/Akshajk3/Polygen.git
+cd Polygen
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Install the required dependencies:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm install
+```
 
-## Learn More
+3. Set up Firebase:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Log in to your Firebase account and create a new project.
+- Configure Firebase Authentication and Storage.
+- Update the Firebase configuration in the project files.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. Run the development server:
 
-### Code Splitting
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The app will now be available at `http://localhost:3000`.
 
-### Analyzing the Bundle Size
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Sign up or log in with your email or Google account.
+2. Upload images of the object or scene you'd like to generate a 3D model from.
+3. Wait for the processing to finish.
+4. Download the model in PLY or OBJ format.
+5. Recommended to use a tool like Meshlab to view and edit the point cloud or mesh.
 
-### Making a Progressive Web App
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Contributions are welcome! Feel free to open a pull request if you’d like to improve Polygen.
 
-### Advanced Configuration
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project is licensed under the Creative Commons license. See the `LICENSE` file for more details.
 
-### Deployment
+## Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For any questions or suggestions, feel free to reach out via email: [akshaj.kanumuri@gmail.com].
