@@ -40,6 +40,18 @@ const Header = () => {
                         <div>
                             <img src="polygen.png" alt="Logo" className="logoimg" />
                         </div>
+                        <div>
+                            <Link
+                                to="/generate">
+                                Generate
+                            </Link>
+                        </div>
+                        <div>
+                            <Link
+                                to="/reconstruct">
+                                Reconstruct
+                            </Link>
+                        </div>
                         <button className="navlink-logout" onClick={handleLogout}>
                             Logout
                         </button>
