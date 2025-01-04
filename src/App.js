@@ -2,14 +2,17 @@ import logo from './logo.svg';
 import './App.css';
 import "./style.scss"
 
-import Upload from "./Upload";
+import Upload from "./components/upload";
 import Login from "./components/login";
 import Home from "./components/home"
 import Register from "./components/register"
 import Navbar from "./components/header"
+import SF3DUpload from './components/generator';
 
 import { AuthProvider } from './context/AuthContext';
 import { useRoutes } from 'react-router-dom';
+import { element } from 'three/webgpu';
+import { SDK_VERSION } from 'firebase/app';
 
 
 
@@ -38,6 +41,10 @@ function App() {
     {
       path: "/header",
       element: <Navbar />,
+    },
+    {
+      path: "/generate",
+      element: <SF3DUpload />
     },
   ];
   let routesElement = useRoutes(routesArray);

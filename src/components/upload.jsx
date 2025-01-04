@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { storage } from "./firebase";
+import { storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
-import stepOne from "./img/Step One.png";
-import stepTwo from "./img/StepTwo.png";
-import stepThree from "./img/StepThree.png"
+import stepOne from "../img/Step One.png";
+import stepTwo from "../img/StepTwo.png";
+import stepThree from "../img/StepThree.png"
+import { getAuth } from "firebase/auth";
+
 
 const Upload = () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    var userID;
+    
+    if (user) {
+        userID = user.uid;
+    } else {
+        console.error("Error: No User Logged In");
+    }
+
     const [images, setImages] = useState([]);
     const [done, setDone] = useState(false)
     const [statusMessage, setStatusMessage] = useState("");
@@ -30,7 +42,7 @@ const Upload = () => {
         let uploadedImageURLs = [];
     
         images.forEach((img) => {
-            const directory_path = 'images/';
+            const directory_path = 'images/' + userID;
             const storageRef = ref(storage, directory_path + uuid());
             const uploadTask = uploadBytesResumable(storageRef, img);
     
