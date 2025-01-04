@@ -59,7 +59,7 @@ const Header = () => {
                 ) : (
                     <nav className="headernav">
                         <div>
-                            <img src="polygen.png" alt="Logo" className="logoimg" />
+                            <img onClick={() => navigate('/home')} src="polygen.png" alt="Logo" className="logoimg" />
                         </div>
                     </nav>
                 )}

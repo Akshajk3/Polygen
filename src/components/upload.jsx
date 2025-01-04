@@ -245,7 +245,7 @@ const Upload = () => {
                 Upload
             </button>
         </div>
-
+            {/* INSTRUCTIONS --------------------- */}
             <div className="instructions-section">
                 <h2 className="instructions-title">How to Use the App</h2>
 

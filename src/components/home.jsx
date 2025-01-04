@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import * as THREE from 'three';
 import { OBJLoader, OrbitControls } from 'three-stdlib';
-import kay from "../img/kayoncomp.jpeg"
-import aki from "../img/aki.jpeg"
+import cubeimg from "../img/3dimage.jpg";
 
 const Home = () => {
     const { currentUser } = useAuth();
@@ -66,9 +65,10 @@ const Home = () => {
     return (
         <div className="homepage-container">
             <section className="hero-section">
-                <video autoPlay muted loop className="background-video">
+                {/* <video autoPlay muted loop className="background-video">
                     <source src="sampleclip.mp4" type="video/mp4" />
-                </video>
+                </video> */}
+                <img src={cubeimg} alt="cube" className='background-video'/>
                 <div className="hero-content">
                     {/* <h1 className="hero-title">Polygen</h1> */}
                     <img src="polygen.png" alt="Logo" className="heroimg" />
@@ -99,7 +99,7 @@ const Home = () => {
                 <div ref={viewerRef} className="model-viewer"></div>
             </section> */}
 
-            <section className="credits-section">
+            {/* <section className="credits-section">
                 <h2>Credits</h2>
                 <div className="credits-container">
                     <div className="credit-item">
@@ -118,25 +118,9 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
         </div>
     );
 };
 
 export default Home;
-
-
-// // <div className='text-2xl font-bold pt-14'>Hello {currentUser.displayName ? currentUser.displayName : currentUser.email}, you are now logged in.</div>
-//         <div className="landing-container">
-//             <div className='blob'/>
-//             <header className="landing-header">
-//                 <h1>Welcome to LifeScan</h1>
-//                 <p>Your personalized AI solution for life-scanning technology.</p>
-//             </header>
-            
-//             <div className="blob-3d"/>
-            
-//             <button className="start-button" onClick={handleStartGenerating}>
-//                 Start Generating
-//             </button>
-//         </div>

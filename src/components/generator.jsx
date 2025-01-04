@@ -4,6 +4,9 @@ import { v4 as uuid } from "uuid";
 import { uploadBytesResumable, getDownloadURL, ref, deleteObject } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { io } from "socket.io-client";
+import stepOne from "../img/Step One.png";
+import stepTwo from "../img/StepTwo.png";
+import stepThree from "../img/StepThree.png"
 
 const SF3DUpload = () => {
     const auth = getAuth();
@@ -181,7 +184,7 @@ const SF3DUpload = () => {
             <div className="blob"></div>
             <div className="input-container">
                 <div className="info-text">
-                    This app allows you to upload an image and provide parameters to generate a 3D model using SF3D.
+                    This app allows you to upload image(s) and converts them into 3D models using SF3D!
                 </div>
 
                 <div className="send-container">
@@ -189,7 +192,7 @@ const SF3DUpload = () => {
                         type="file"
                         onChange={handleFileChange}
                         className="file-input"
-                        id="file"
+                        id="file"   
                     />
                     {image && <img src={URL.createObjectURL(image)} alt="Selected" className="preview-image" />}
 
@@ -258,7 +261,8 @@ const SF3DUpload = () => {
                             />
                         </label>
                     </div>
-
+                    <br />
+                    <br />
                     {done && (
                         <button className="download-button" onClick={downloadModel}>
                             Download Model
@@ -269,9 +273,65 @@ const SF3DUpload = () => {
                         Upload
                     </button>
                     <p className="status-message">{statusMessage}</p>
+                    <div className="extra-info">
+                    Adjust parameters to control the quality and resolution of the 3D model.
+                    </div>
+                </div>
+            </div>
+            <div className="instructions-section">
+                <h2 className="instructions-title">How to Use the App</h2>
+
+                <div className="instruction-step">
+                    <div className="step-text">
+                        <h3>Step 1:</h3>
+                        <p>
+                            <strong>Upload High-Quality Images:</strong>
+                            <p>
+                                Choose multiple high-resolution images of the object you want to turn into a 3D model.
+                                Ensure that you capture images from different angles for the best results.
+                                Clear, well-lit images will improve the accuracy of the 3D model.
+                            </p>
+                            <strong>
+                            <a href="./images.zip" download>Example Dataset</a>
+                            </strong>
+                        </p>
+                    </div>
+                    <img src={stepOne} alt="Step 1" className="slanted-image" />
+                </div>
+
+                <div className="instruction-step alternate">
+                    <div className="step-text">
+                        <h3>Step 2:</h3>
+                        <p>
+                            <strong>Wait for the 3D Model to Generate:</strong>
+                            <p>   
+                                After uploading, the system will process your images to create a dense 3D model.
+                                This can take a few minutes depending on the number and quality of the images.
+                                Be patient as the model is being generated.
+                            </p>
+                        </p>
+                    </div>
+                    <img src={stepTwo} alt="Step 2" className="slanted-image" />
+                </div>
+
+                <div className="instruction-step">
+                    <div className="step-text">
+                        <h3>Step 3:</h3>
+                        <p>
+                            <strong>Download Your 3D Model:</strong>
+                            <p>
+                                Once the 3D model is ready, you'll be able to download both the point cloud
+                                and mesh files (in .ply and .obj formats). You can use these files for visualization
+                                or further editing in 3D software.
+                            </p>
+                        </p>
+                    </div>
+                    <img src={stepThree} alt="Step 3" className="slanted-image" />
                 </div>
             </div>
         </div>
+
+        
     );
 };
 
