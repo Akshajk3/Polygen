@@ -24,7 +24,7 @@ const Upload = () => {
     const [statusMessage, setStatusMessage] = useState("");
     const [checkInterval, setCheckInterval] = useState(null);
     const [notified, setNotified] = useState(false);
-    const webhookURL = "https://8f36-34-16-147-134.ngrok-free.app/webhook";
+    const webhookURL = "https://8f36-34-16-147-134.ngrok-free.app" + "/webhook";
 
     const handleSend = async () => {
         if (images.length === 0) {
@@ -42,7 +42,7 @@ const Upload = () => {
         let uploadedImageURLs = [];
     
         images.forEach((img) => {
-            const directory_path = 'images/' + userID;
+            const directory_path = 'images/' + userID + "/";
             const storageRef = ref(storage, directory_path + uuid());
             const uploadTask = uploadBytesResumable(storageRef, img);
     
