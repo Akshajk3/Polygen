@@ -38,17 +38,16 @@ const Header = () => {
                 {userLoggedIn ? (
                     <nav className="headernav">
                         <div>
-                            <img src="polygen.png" alt="Logo" className="logoimg" />
+                            <img onClick={() => navigate('/home')} src="polygen.png" alt="Logo" className="logoimg" />
                         </div>
                         <div>
-                            <Link
-                                to="/generate">
+                            <Link to="/generate" className="navlink">
                                 Generate
                             </Link>
                         </div>
                         <div>
                             <Link
-                                to="/reconstruct">
+                                to="/reconstruct" className="navlink">
                                 Reconstruct
                             </Link>
                         </div>

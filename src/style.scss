@@ -403,20 +403,22 @@
     color: gray;
 }
 
-.navlink-a,
-.navlink-b,
-.navlink-logout {
+.navlink{
     font-size: 1.4rem;
     color: white;
     text-decoration: none;
 }
 
 .navlink-logout {
-    background-color: #12325c; /* Dark Blue */
+    background-color: #12325c;
     padding: 8px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    background-color: #12325c;
+    color: white;
+    font-size: 1rem;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .navlink-logout:hover {

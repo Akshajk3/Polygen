@@ -378,23 +378,18 @@ const SF3DUpload = () => {
                         Settings
                     </button>
                     <p className="status-message">{statusMessage}</p>
-                    <div className="extra-info">
-                    Adjust parameters to control the quality and resolution of the 3D model.
-                    </div>
                 </div>
             </div>
             <div className="instructions-section">
-                <h2 className="instructions-title">How to Use the App</h2>
+                <h2 className="instructions-title">How to Use Generate</h2>
 
                 <div className="instruction-step">
                     <div className="step-text">
                         <h3>Step 1:</h3>
                         <p>
-                            <strong>Upload High-Quality Images:</strong>
+                            <strong>Upload A High Quality:</strong>
                             <p>
-                                Choose multiple high-resolution images of the object you want to turn into a 3D model.
-                                Ensure that you capture images from different angles for the best results.
-                                Clear, well-lit images will improve the accuracy of the 3D model.
+                                Choose a high-quality image of the object you want to turn into a 3D model. The image should be clear and well-lit to ensure the best results. Have little to no distractions/objects in the background.
                             </p>
                             <strong>
                             <a href="./images.zip" download>Example Dataset</a>
