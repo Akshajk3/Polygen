@@ -20,9 +20,8 @@ bucket = storage.bucket()
 
 # Set up Flask app and enable CORS for all routes
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-
-socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")
+CORS(app, resources={r"/*": {"origins": "*"}})
+socketio = SocketIO(app, cors_allowed_origins="*", logger=True, engineio_logger=True)
 
 @app.before_request
 def handle_preflight():
@@ -30,16 +29,23 @@ def handle_preflight():
         response = jsonify({})
         response.status_code = 200
         return response
+    
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return response
 
 def download_images(uid):
-  folder_name = uid + '/images/'
-  local_dir = 'images'
-  os.makedirs(local_dir, exist_ok=True)
-  blobs = bucket.list_blobs(prefix=folder_name)
+    folder_name = uid + '/images/'
+    local_dir = 'images'
+    os.makedirs(local_dir, exist_ok=True)
+    blobs = bucket.list_blobs(prefix=folder_name)
 
-  for blob in blobs:
-    local_path = os.path.join(local_dir, os.path.relpath(blob.name, folder_name))
-    os.makedirs(os.path.dirname(local_path), exist_ok=True)
+    for blob in blobs:
+        local_path = os.path.join(local_dir, os.path.relpath(blob.name, folder_name))
+        os.makedirs(os.path.dirname(local_path), exist_ok=True)
 
     if not blob.name.endswith('/'):
       blob.download_to_filename(local_path)
@@ -53,7 +59,6 @@ def upload_file(bucket, local_file, destination_path):
     print(f'Uploaded {local_file} to {destination_path}')
 
 def upload_mesh(uid):
-
     bucket = storage.bucket()
     upload_file(bucket, "output/0/mesh.glb", uid + '/results/mesh.glb')
     print("Finished Uploading")
@@ -126,4 +131,4 @@ if __name__ == '__main__':
     public_url = ngrok.connect(5001)
     print(f"Ngrok Tunnel URL: {public_url}")
     
-    app.run(host='0.0.0.0', port=5001)
+    socketio.run(app, host='0.0.0.0', port=5001)

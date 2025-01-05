@@ -26,9 +26,12 @@ const SF3DUpload = () => {
         targetVertexCount: -1, // default value from the Python code
         batchSize: 1 // default value from the Python code
     });
-    const serverURL = "http://192.168.1.183:5001/";
+    const serverURL = "https://4339-104-33-80-102.ngrok-free.app/";
 
-    const socket = io(serverURL);
+    const socket = io(serverURL, {
+        transports: ["websocket"],  // Ensures WebSocket transport is used
+        withCredentials: true,       // Send credentials if required
+      });
 
     useEffect(() => {
         socket.on("models_ready", (data) => {
