@@ -6,6 +6,7 @@ import stepOne from "../img/Step One.png";
 import stepTwo from "../img/StepTwo.png";
 import stepThree from "../img/StepThree.png"
 import { getAuth } from "firebase/auth";
+import { io } from "socket.io-client;"
 
 
 const Upload = () => {
@@ -24,7 +25,12 @@ const Upload = () => {
     const [statusMessage, setStatusMessage] = useState("");
     const [checkInterval, setCheckInterval] = useState(null);
     const [notified, setNotified] = useState(false);
-    const webhookURL = "https://8f36-34-16-147-134.ngrok-free.app" + "/webhook";
+    const serverURL = "https://8f36-34-16-147-134.ngrok-free.app";
+
+    const socket = io(serverURL, {
+        transports: ["websocket"],
+        withCredentials: true
+    });
 
     const handleSend = async () => {
         if (images.length === 0) {
