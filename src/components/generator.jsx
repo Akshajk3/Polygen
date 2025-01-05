@@ -7,6 +7,7 @@ import { io } from "socket.io-client";
 import stepOne from "../img/Step One.png";
 import stepTwo from "../img/StepTwo.png";
 import stepThree from "../img/StepThree.png"
+import { div } from "three/webgpu";
 
 const SF3DUpload = () => {
     const auth = getAuth();
@@ -29,6 +30,24 @@ const SF3DUpload = () => {
         targetVertexCount: -1, // default value from the Python code
         batchSize: 1 // default value from the Python code
     });
+    const [showSettings, setShowSettings] = useState(false);
+
+    const openSettings = () => setShowSettings(true);
+    const closeSettings = () => setShowSettings(false);
+
+    const saveSettings = (e) => {
+        e.preventDefault();
+        const newSettings = {
+            foregroundRatio: parseFloat(e.target.foregroundRatio.value),
+            textureResolution: parseInt(e.target.textureResolution.value, 10),
+            remeshOption: e.target.remeshOption.value,
+            targetVertexCount: parseInt(e.target.targetVertexCount.value, 10),
+            batchSize: parseInt(e.target.batchSize.value, 10),
+        };
+        setParameters(newSettings);
+        closeSettings();
+    };
+
     const serverURL = "http://192.168.1.183:5001/";
 
     const socket = io(serverURL);
@@ -164,9 +183,18 @@ const SF3DUpload = () => {
 
     // Handle file input change
     const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setImage(file);
+        const file = e.target.files;
+        if (file.length > 1) {
+            setImage(null);
+            setStatusMessage("Please select only one image.");
+        }
+        else if (file.length === 1 && file[0].type.startsWith('image/')) {
+            setImage(file[0]);
+            setStatusMessage("");
+        }
+        else {
+            setImage(null);
+            setStatusMessage("Please select an image file.");
         }
     };
 
@@ -179,6 +207,8 @@ const SF3DUpload = () => {
         }));
     };
 
+
+
     return (
         <div className="upload-page">
             <div className="blob"></div>
@@ -186,7 +216,6 @@ const SF3DUpload = () => {
                 <div className="info-text">
                     This app allows you to upload image(s) and converts them into 3D models using SF3D!
                 </div>
-
                 <div className="send-container">
                     <input
                         type="file"
@@ -196,8 +225,81 @@ const SF3DUpload = () => {
                     />
                     {image && <img src={URL.createObjectURL(image)} alt="Selected" className="preview-image" />}
 
-                    <div className="parameter-inputs">
-                        <label>
+                    {/* settings module */}
+                    {showSettings && (
+                    <div className="settings-modal">
+                        <div className="settings-content">
+                            <h2>Settings</h2>
+                            <form onSubmit={saveSettings}>
+                                <label>
+                                    Foreground Ratio:
+                                    <input
+                                        type="number"
+                                        name="foregroundRatio"
+                                        defaultValue={parameters.foregroundRatio}
+                                        step="0.01"
+                                        min="0"
+                                        max="1"
+                                    />
+                                </label>
+                                <label>
+                                    Texture Resolution:
+                                    <input
+                                        type="number"
+                                        name="textureResolution"
+                                        defaultValue={parameters.textureResolution}
+                                        min="512"
+                                        max="4096"
+                                    />
+                                </label>
+                                <label>
+                                    Remesh Option:
+                                    <select
+                                        name="remeshOption"
+                                        defaultValue={parameters.remeshOption}
+                                    >
+                                        <option value="none">None</option>
+                                        <option value="triangle">Triangle</option>
+                                        <option value="quad">Quad</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    Target Vertex Count:
+                                    <input
+                                        type="number"
+                                        name="targetVertexCount"
+                                        defaultValue={parameters.targetVertexCount}
+                                        placeholder="e.g., 1000000"
+                                    />
+                                </label>
+                                <label>
+                                    Batch Size:
+                                    <input
+                                        type="number"
+                                        name="batchSize"
+                                        defaultValue={parameters.batchSize}
+                                        min="1"
+                                        max="16"
+                                    />  
+                                </label>
+                                <div className="settings-buttons">
+                                    <button type="submit" className="save-button">
+                                        Save
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="cancel-button"
+                                        onClick={closeSettings}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+            )}
+                    {/* <div className="parameter-inputs">
+                        <label className="parameter-label">
                             Foreground Ratio:
                             <input
                                 type="number"
@@ -208,6 +310,7 @@ const SF3DUpload = () => {
                                 min="0"
                                 max="1"
                                 placeholder="e.g., 0.85"
+                                className="parameter-input"
                             />
                         </label>
 
@@ -221,6 +324,7 @@ const SF3DUpload = () => {
                                 min="512"
                                 max="4096"
                                 placeholder="e.g., 1024"
+                                className="parameter-input"
                             />
                         </label>
 
@@ -260,9 +364,7 @@ const SF3DUpload = () => {
                                 placeholder="e.g., 1"
                             />
                         </label>
-                    </div>
-                    <br />
-                    <br />
+                    </div> */}
                     {done && (
                         <button className="download-button" onClick={downloadModel}>
                             Download Model
@@ -271,6 +373,9 @@ const SF3DUpload = () => {
 
                     <button className="upload-button" onClick={handleSend}>
                         Upload
+                    </button>
+                    <button className="settings-button" onClick={openSettings}>
+                        Settings
                     </button>
                     <p className="status-message">{statusMessage}</p>
                     <div className="extra-info">

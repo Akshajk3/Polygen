@@ -915,6 +915,135 @@ body {
         }
     }
 }
+
+.settings-button {
+    background-color: rgba(47, 184, 255, 0.42);
+    color: whitesmoke;
+    padding: 15px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: .8rem;
+    margin-top: 0px;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #63c0e8;
+    }
+}
+.settings-modal {
+    position: fixed;
+    top: -25%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 38, 77, 0.8); // Semi-transparent dark blue
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.settings-content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3)); // Gradient effect
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); // Subtle glow
+    border-radius: 15px;
+    padding: 25px;
+    width: 90%;
+    max-width: 400px;
+    color: #f0f0f0; // Light gray text
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settings-content h2 {
+    font-size: 1.8rem;
+    color: #87ceeb; // Light blue text
+    margin-bottom: 20px;
+    text-shadow: 0px 0px 6px rgba(135, 206, 235, 0.5); // Glowing text effect
+}
+
+.settings-content label {
+    font-size: 1rem;
+    color: #b0c6de; // Light grayish blue
+    margin-bottom: 10px;
+    width: 100%;
+
+    input, select {
+        margin-top: 5px;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #63c0e8; // Light blue border
+        border-radius: 8px;
+        background: rgba(47, 184, 255, 0.15); // Semi-transparent blue
+        color: #fff;
+        font-size: 1rem;
+
+        &:focus {
+            outline: none;
+            border-color: #5dbb9d; // Seafoam green border
+            box-shadow: 0 0 8px rgba(93, 187, 157, 0.5);
+        }
+    }
+}
+
+.settings-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.save-button, .cancel-button {
+    background: linear-gradient(135deg, #12325c, #28a07c); // Dark blue to seafoam green
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 12px rgba(47, 184, 255, 0.4);
+    }
+}
+
+.cancel-button {
+    background: linear-gradient(135deg, #d9534f, #b52e28); // Red gradient for cancel
+}
+
+@media (max-width: 768px) {
+    .settings-content {
+        padding: 20px;
+        width: 90%;
+    }
+
+    .settings-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .save-button, .cancel-button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%); // Slight offset for animation effect
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
 // original
 
 
