@@ -26,7 +26,7 @@ const SF3DUpload = () => {
         targetVertexCount: -1, // default value from the Python code
         batchSize: 1 // default value from the Python code
     });
-    const serverURL = "https://68fd-104-33-80-102.ngrok-free.app/";
+    const serverURL = "http://localhost:5001/";
 
     const socket = io(serverURL, {
         transports: ["websocket"],  // Ensures WebSocket transport is used
