@@ -6,7 +6,7 @@ import stepOne from "../img/Step One.png";
 import stepTwo from "../img/StepTwo.png";
 import stepThree from "../img/StepThree.png"
 import { getAuth } from "firebase/auth";
-
+//hi
 
 const Upload = () => {
     const auth = getAuth();
