@@ -6,7 +6,8 @@ import stepOne from "../img/Step One.png";
 import stepTwo from "../img/StepTwo.png";
 import stepThree from "../img/StepThree.png"
 import { getAuth } from "firebase/auth";
-import { io } from "socket.io-client;"
+import { io } from "socket.io-client";
+import { error } from "firebase-functions/logger";
 
 
 const Upload = () => {
@@ -32,100 +33,118 @@ const Upload = () => {
         withCredentials: true
     });
 
+    useEffect(() => {
+        socket.on("models_ready", (data) => {
+            if (data.status === "Models are ready for download") {
+                setDone(true);
+                setStatusMessage("Models Successfully Generated!");
+            }
+        });
+
+        return() => {
+            socket.disconnect();
+        }
+    }, [socket]);
+
+    const checkServerStatus = async () => {
+        try {
+            const response = await fetch(serverURL + "/status", {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({status_check: true}),
+            });
+
+            if (response.ok) {
+                const data = response.json();
+                if (data.server === "running" && data.firebase === "connected") {
+                    return true;
+                } else {
+                    console.error("Server issue detected", data);
+                    return false;
+                }
+            } else {
+                console.error("Server not responsive, staus check failed");
+                return false;
+            }
+        } catch (error) {
+            console.error("Error checking server status " + error);
+            return false;
+        }
+    }
+    
+    const sendDataToServer = async () => {
+        try {
+            const response = await fetch(serverURL + "status", {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json",
+                },
+                body: JSON.stringify({
+                    images_ready: true,
+                    uid: userID,
+                })
+            });
+
+            if (response.ok) {
+                setStatusMessage("Images Uploaded Successfully!");
+            } else {
+                setStatusMessage("Failed to Upload Images :(");
+            }
+        }
+        catch (error) {
+            console.error("Error seding data: ", error);
+            setStatusMessage("Error Notifying Server");
+        }
+    }
+
     const handleSend = async () => {
         if (images.length === 0) {
             console.log("No Files selected.");
             return;
         }
-    
-        if (notified) {
-            console.log("Already notified.");
+
+        setDone(false);
+
+        const serverStatus = await checkServerStatus();
+
+        if (!serverStatus) {
+            setStatusMessage("Server is not responding. Please try again later");
             return;
         }
     
         setStatusMessage("Uploading...");
-        let uploadPromises = [];
-        let uploadedImageURLs = [];
     
-        images.forEach((img) => {
-            const directory_path = 'images/' + userID + "/";
+        for (const img of images) {
+            const directory_path = userID + "/images/reconstruct/";
             const storageRef = ref(storage, directory_path + uuid());
             const uploadTask = uploadBytesResumable(storageRef, img);
-    
-            const uploadPromise = new Promise((resolve, reject) => {
-                uploadTask.on(
-                    "state_changed",
-                    (snapshot) => {
-                        // Optionally monitor progress here
-                    },
-                    (error) => {
-                        console.error("Upload failed:", error);
-                        reject(error);
-                    },
-                    () => {
-                        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                            console.log("File available at:", downloadURL);
-                            uploadedImageURLs.push(downloadURL); // Store the download URL
+            
+            try {
+                await new Promise((resolve, reject) => {
+                    uploadTask.on(
+                        "state_changed",
+                        null,
+                        (error) => {
+                            console.error("Upload failed:", error);
+                            reject(error);
+                        },
+                        () => {
+                            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                                console.log("File available at:", downloadURL);
+                            });
                             resolve();
-                        });
-                    }
-                );
-            });
-            uploadPromises.push(uploadPromise);
-        });
-    
-        try {
-            await Promise.all(uploadPromises);
-            console.log("All images uploaded successfully");
-    
-            setStatusMessage("Generating Models...");
-    
-            // Notify the Colab server via a webhook after all images are uploaded
-            const response = await fetch(webhookURL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    user_id: uuid(), // Add user ID or other identifier here
-                    images_ready: true,
-                    image_urls: uploadedImageURLs, // Send the list of uploaded image URLs to the server
-                }),
-            });
-    
-            if (response.ok) {
-                console.log("Server notified successfully");
-                setNotified(true); // Mark as notified
-            } else {
-                console.error("Failed to notify server");
-                setStatusMessage("Error notifying server");
+                        }
+                    );
+                });
+                sendDataToServer();
+            } catch (error) {
+                console.error("Error uploading images:", error);
+                setStatusMessage("Error uploading image.");
             }
-        } catch (error) {
-            console.error("Error uploading images or notifying server:", error);
-            //setStatusMessage("Error during upload please try again.");
         }
-    };
 
-    const checkForFinish = async () => {
-        try {
-            const doneFileRef = ref(storage, 'results/done.txt');
-            await getDownloadURL(doneFileRef);
-            setDone(true);
-            setStatusMessage("Models are ready for download");
-
-            if (checkInterval) {
-                clearInterval(checkInterval);
-                setCheckInterval(null);
-            }
-        }
-        catch (error) {
-            if (error.code === 'storage/object-not-found') {
-                console.log('done file not found retrying...');
-            } else {
-                console.log('Error: ', error);
-                setStatusMessage("Error while generating models");
-            }
-        }
     };
 
     const downloadModels = async () => {
@@ -166,14 +185,6 @@ const Upload = () => {
             setStatusMessage("Generating Models...")
         }
     };
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            console.log("Checking for Finish");
-            checkForFinish();
-        }, 10000);
-        return () => clearInterval(interval);
-    }, []);
 
     const handleDrop = (e) => {
         e.preventDefault();
@@ -227,7 +238,8 @@ const Upload = () => {
                         ))}
                 </div>
 
-                {done && (
+                {done && setStatusMessage("Models Ready for Download!")
+                (
                     <button className="download-button" onClick={downloadModels}>
                         Download Models
                     </button>

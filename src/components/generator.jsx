@@ -26,7 +26,7 @@ const SF3DUpload = () => {
         targetVertexCount: -1, // default value from the Python code
         batchSize: 1 // default value from the Python code
     });
-    const serverURL = "https://4339-104-33-80-102.ngrok-free.app/";
+    const serverURL = "https://68fd-104-33-80-102.ngrok-free.app/";
 
     const socket = io(serverURL, {
         transports: ["websocket"],  // Ensures WebSocket transport is used
@@ -37,7 +37,7 @@ const SF3DUpload = () => {
         socket.on("models_ready", (data) => {
             if (data.status === "Models are ready for download") {
                 setDone(true);
-                setStatusMessage("Model Successfuly Generated!");
+                setStatusMessage("Model Successfully Generated!");
             }
         });
 
@@ -126,7 +126,7 @@ const SF3DUpload = () => {
         }
         setDone(false);
         
-        const serverStatus = checkServerStatus();
+        const serverStatus = await checkServerStatus();
 
         if (!serverStatus) {
             setStatusMessage("Server is not responding. Please try again later");
@@ -134,7 +134,7 @@ const SF3DUpload = () => {
         }
 
         setStatusMessage("Uploading...");
-        const directoryPath = userID + "/images/";
+        const directoryPath = userID + "/images/generate/";
         const storageRef = ref(storage, directoryPath + uuid());
         const uploadTask = uploadBytesResumable(storageRef, image);
 

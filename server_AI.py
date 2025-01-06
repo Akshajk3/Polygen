@@ -7,7 +7,6 @@ from firebase_admin import credentials, storage
 from firebase_admin.exceptions import FirebaseError
 import os
 import subprocess
-import shutil
 
 os.environ['SF3D_USE_CPU'] = '1'
 
@@ -38,8 +37,8 @@ def add_cors_headers(response):
     return response
 
 def download_images(uid):
-    folder_name = uid + '/images/'
-    local_dir = 'images'
+    folder_name = uid + '/images/generate'
+    local_dir = 'images/generate'
     os.makedirs(local_dir, exist_ok=True)
     blobs = bucket.list_blobs(prefix=folder_name)
 
@@ -68,7 +67,7 @@ def upload_mesh(uid):
     for image in os.listdir('images'):
         os.remove('images/' + image)
 
-def generate_images():
+def generate_model():
 
     for image in os.listdir('images'):
        img_name = image
@@ -76,9 +75,9 @@ def generate_images():
     command = [
         "python3",
         "run.py",
-        "images/" + img_name,
+        "images/generate" + img_name,
         "--output-dir",
-        "output/"
+        "output/generate/"
     ]
 
     try:
@@ -118,7 +117,7 @@ def webhook():
        return jsonify({"status": "error", "message": "UID is missing"}), 400
 
     download_images(uid)
-    generate_images()
+    generate_model()
     upload_mesh(uid)
 
     socketio.emit('models_ready', {'status': 'Models are ready for download'})
