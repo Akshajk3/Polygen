@@ -7,7 +7,6 @@ import stepTwo from "../img/StepTwo.png";
 import stepThree from "../img/StepThree.png"
 import { getAuth } from "firebase/auth";
 import { io } from "socket.io-client";
-import { error } from "firebase-functions/logger";
 
 
 const Upload = () => {
