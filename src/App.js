@@ -8,6 +8,8 @@ import Home from "./components/home"
 import Register from "./components/register"
 import Navbar from "./components/header"
 import SF3DUpload from './components/generator';
+import Contact from './components/contact';
+import About from './components/about';
 
 import { AuthProvider } from './context/AuthContext';
 import { useRoutes } from 'react-router-dom';
@@ -29,6 +31,14 @@ function App() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/contact",
+      element: <Contact />,
+    },
+    {
+      path: "/about",
+      element: <About />,
     },
     {
       path: "/home",

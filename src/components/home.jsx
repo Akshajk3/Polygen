@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import * as THREE from 'three';
 import { OBJLoader, OrbitControls } from 'three-stdlib';
-import cubeimg from "../img/3dimage.jpg";
 
 const Home = () => {
     const { currentUser } = useAuth();
     const navigate = useNavigate();
     // const viewerRef = useRef();
+
+    const scrollToSection = (section) => {
+        document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
+    };
 
     const handleStartGenerating = () => {
         if (currentUser) {
@@ -63,63 +66,71 @@ const Home = () => {
 // }, []);
 
     return (
-        <div className="homepage-container">
+
+        <div className="home-page">
+            {/* Hero Section */}
             <section className="hero-section">
-                {/* <video autoPlay muted loop className="background-video">
-                    <source src="sampleclip.mp4" type="video/mp4" />
-                </video> */}
-                <img src={cubeimg} alt="cube" className='background-video'/>
                 <div className="hero-content">
-                    {/* <h1 className="hero-title">Polygen</h1> */}
-                    <img src="polygen.png" alt="Logo" className="heroimg" />
-                    <p className="hero-subtitle">Making your imagination reality</p>
-                    <button className="start-button" onClick={handleStartGenerating}>Start Generating</button>
+                    <h1>Transform Your Vision into 3D Reality</h1>
+                    <p>
+                        With Polygen, seamlessly turn your images into stunning 3D models.
+                        Join the revolution in digital transformation.
+                    </p>
+                    <button onClick={() => scrollToSection('features')} className="cta-button">
+                        Explore Features
+                    </button>
+                </div>
+                <div className="hero-visual">
+                    <img src="/hero-graphic.png" alt="3D Graphic" />
                 </div>
             </section>
 
-            {/*yt tut */}
-            {/* <section className="tutorial-section">
-                <h2>How to use Polygen</h2>
-                <div className="video-container">
-                    <iframe
-                        src="https://www.youtube.com/embed/QpwJEYGCngI"
-                        title="Tutorial"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="tutorial-video"
-                    ></iframe>
-                    <div className="left-design-element"></div>
-                    <div className="right-design-element"></div>
-                </div>
-            </section> */}
-
-            {/* 3d model viewer */}
-            {/* <section className="viewer-section">
-                <h2>Sample 3D Model (Using a professional dataset) </h2>
-                <div ref={viewerRef} className="model-viewer"></div>
-            </section> */}
-
-            {/* <section className="credits-section">
-                <h2>Credits</h2>
-                <div className="credits-container">
-                    <div className="credit-item">
-                        <img src={kay} alt="Person 1" className="credit-image" />
-                        <div className="credit-details">
-                            <h3>Kshitij Singhal</h3>
-                            <p>iamkay556@gmail.com</p>
-                        </div>
+            {/* Features Section */}
+            <section id="features" className="features-section">
+                <h2>Features That Empower You</h2>
+                <div className="features-grid">
+                    <div className="feature-card">
+                        <img src="/icon-upload.png" alt="Upload" />
+                        <h3>Seamless Upload</h3>
+                        <p>Easily upload images to create high-quality 3D models.</p>
                     </div>
-
-                    <div className="credit-item">
-                        <img src={aki} alt="Person 2" className="credit-image" />
-                        <div className="credit-details">
-                            <h3>Akshaj Kanumuri</h3>
-                            <p>akshaj.kanumuri@gmail.com</p>
-                        </div>
+                    <div className="feature-card">
+                        <img src="/icon-speed.png" alt="Speed" />
+                        <h3>Fast Processing</h3>
+                        <p>Experience rapid 3D model generation with cutting-edge algorithms.</p>
+                    </div>
+                    <div className="feature-card">
+                        <img src="/icon-quality.png" alt="Quality" />
+                        <h3>Unmatched Quality</h3>
+                        <p>Generate models with industry-grade precision and detail.</p>
                     </div>
                 </div>
-            </section> */}
+            </section>
+
+            {/* Call to Action */}
+            <section className="cta-section">
+                <h2>Ready to Start Your 3D Journey?</h2>
+                <p>
+                    Polygen makes 3D modeling accessible to everyone. Get started now
+                    and bring your ideas to life.
+                </p>
+                <button className="cta-button">Get Started</button>
+            </section>
         </div>
+
+        // <div className="homepage-container">
+        //     <section className="hero-section">
+        //         <div className="blob"></div>
+        //         <div className="hero-content">
+        //             {/* <h1 className="hero-title">Polygen</h1> */}
+        //             <img src="polygen.png" alt="Logo" className="heroimg" />
+        //             <p className="hero-subtitle">Making your imagination reality</p>
+        //             <button className="start-button" onClick={handleStartGenerating}>Start Generating</button>
+        //         </div>
+        //     </section>
+        // </div>
+
+        
     );
 };
 
