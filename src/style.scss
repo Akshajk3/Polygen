@@ -714,11 +714,12 @@ body {
 .home-page {
     font-family: 'Michroma', sans-serif;
     color: #f0f0f0;
+    
 
     .hero-section {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         padding: 100px 10%;
         background: linear-gradient(135deg, #12264c, #1c3b5d, #234d6c);
         min-height: 90vh;
@@ -772,6 +773,17 @@ body {
             font-size: 2.5rem;
             margin-bottom: 40px;
             color: #87ceeb;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: -50px; /* Adjust to overlap the previous section */
+            left: 0;
+            right: 0;
+            height: 100px; /* Size of the gradient transition */
+            background: linear-gradient(135deg, #234d6c, #1f1f47); /* Transition colors */
+            z-index: 0;
         }
 
         .features-grid {
@@ -845,9 +857,55 @@ body {
     }
 }
 
+// 3d model section ========================
+.three-display-section {
+    padding: 60px 10%;
+    background: linear-gradient(135deg, #1c1c3b, #0f0f29);
+    color: #f0f0f0;
+    text-align: center;
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #87ceeb;
+    }
+
+    .three-display-grid {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .three-display-box {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(206, 198, 198, 0.479);
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        color: #b0c6de;
+    }
+
+    .three-model-container {
+        width: 100%;
+        max-width: 800px;
+        height: 400px;
+        margin: 0 auto;
+        background: rgba(0, 38, 77, 0.8);
+        border: 2px solid #28a07c;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.5);
+        overflow: hidden;
+    }
+}
+
 //--------------------------- home -----------------
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
 .homepage-container {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Michroma', sans-serif;
     color: white;
 
     .hero-section {

@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import * as THREE from 'three';
-import { OBJLoader, OrbitControls } from 'three-stdlib';
+import { GLTFLoader, OrbitControls } from 'three-stdlib';
 
 const Home = () => {
     const { currentUser } = useAuth();
     const navigate = useNavigate();
-    // const viewerRef = useRef();
+    const canvasRefs = [useRef(), useRef(), useRef()];
 
     const scrollToSection = (section) => {
         document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
@@ -21,93 +21,103 @@ const Home = () => {
         }
     };
 
-    // setup Three.js 3D Model Viewer
-//     useEffect(() => {
-//     const scene = new THREE.Scene();
-//     const camera = new THREE.PerspectiveCamera(75, viewerRef.current.clientWidth / viewerRef.current.clientHeight, 0.1, 1000);
-//     const renderer = new THREE.WebGLRenderer({ antialias: true });
-//     renderer.setSize(viewerRef.current.clientWidth, viewerRef.current.clientHeight);
-//     viewerRef.current.appendChild(renderer.domElement);
+    useEffect(() => {
+        canvasRefs.forEach((canvasRef, index) => {
+            if (!canvasRef.current) return;
 
-//     // add lighting
-//     const ambientLight = new THREE.AmbientLight(0xffffff, 1); // soft white light
-//     scene.add(ambientLight);
-//     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // more focused light
-//     directionalLight.position.set(1, 1, 1);
-//     scene.add(directionalLight);
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, canvasRef.current.clientWidth / canvasRef.current.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(canvasRef.current.clientWidth, canvasRef.current.clientHeight);
+            canvasRef.current.appendChild(renderer.domElement);
 
-//     // load the 3D model using OBJLoader
-//     // const loader = new OBJLoader();
-//     // loader.load('/dense.obj', (object) => {
-//     //     object.scale.set(0.5, 0.5, 0.5);
-//     //     scene.add(object);
-//     // }, undefined, (error) => {
-//     //     console.error('Error loading the 3D model:', error);
-//     // });
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+            scene.add(ambientLight);
 
-//     const controls = new OrbitControls(camera, renderer.domElement);
-//     controls.enableDamping = true;
-//     controls.dampingFactor = 0.05;
+            const loader = new GLTFLoader();
+            const modelPaths = [
+                '/groot.glb',
+                '/purse.glb',
+                '/models/mesh3.glb',
+            ];
 
-//     camera.position.z = 5;
+            loader.load(
+                modelPaths[index],
+                (gltf) => {
+                    const model = gltf.scene;
+                    model.scale.set(1.5, 1.5, 1.5);
+                    scene.add(model);
+                    animate();
+                },
+                undefined,
+                (error) => {
+                    console.error(`Error loading 3D model ${index + 1}:`, error);
+                }
+            );
 
-//     const animate = () => {
-//         requestAnimationFrame(animate);
-//         controls.update();
-//         renderer.render(scene, camera);
-//     };
-//     animate();
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.1;
+            camera.position.set(0, 1, 5);
 
-//     return () => {
-//         if (viewerRef.current) {
-//             viewerRef.current.removeChild(renderer.domElement);
-//         }
-//     };
-// }, []);
+            const animate = () => {
+                requestAnimationFrame(animate);
+                controls.update();
+                renderer.render(scene, camera);
+            };
+
+            return () => {
+                if (renderer.domElement && canvasRef.current) {
+                    canvasRef.current.removeChild(renderer.domElement);
+                }
+            };
+        });
+    }, []);
 
     return (
-
         <div className="home-page">
-            {/* Hero Section */}
             <section className="hero-section">
                 <div className="hero-content">
                     <h1>Transform Your Vision into 3D Reality</h1>
                     <p>
-                        With Polygen, seamlessly turn your images into stunning 3D models.
-                        Join the revolution in digital transformation.
+                        With Polygen, seamlessly turn your images into stunning and editable 3D models.
                     </p>
-                    <button onClick={() => scrollToSection('features')} className="cta-button">
-                        Explore Features
+                    <button onClick={handleStartGenerating} className="cta-button">
+                        Get Started
+                    </button>
+                    <button onClick={scrollToSection.bind(null, 'features')} className="cta-button" style={{ marginLeft: '10px' }}>
+                        Learn More
                     </button>
                 </div>
-                <div className="hero-visual">
-                    <img src="/hero-graphic.png" alt="3D Graphic" />
-                </div>
             </section>
-
-            {/* Features Section */}
             <section id="features" className="features-section">
                 <h2>Features That Empower You</h2>
                 <div className="features-grid">
                     <div className="feature-card">
                         <img src="/icon-upload.png" alt="Upload" />
-                        <h3>Seamless Upload</h3>
+                        <h3>Ease of Access</h3>
                         <p>Easily upload images to create high-quality 3D models.</p>
                     </div>
                     <div className="feature-card">
                         <img src="/icon-speed.png" alt="Speed" />
-                        <h3>Fast Processing</h3>
-                        <p>Experience rapid 3D model generation with cutting-edge algorithms.</p>
+                        <h3>Be 10x faster.</h3>
+                        <p>Create 3D models automatically without any experience in 3D designing. Speed up your design process and save time.</p>
                     </div>
                     <div className="feature-card">
                         <img src="/icon-quality.png" alt="Quality" />
-                        <h3>Unmatched Quality</h3>
-                        <p>Generate models with industry-grade precision and detail.</p>
+                        <h3>Save money.</h3>
+                        <p>Polygen focuses on being a low-cost solution in order to be accessible to everyone. </p>
                     </div>
                 </div>
             </section>
-
-            {/* Call to Action */}
+            <div className="three-display-section">
+                <h2>Explore 3D Models</h2>
+                <div className="three-display-grid">
+                    <div className="three-display-box" ref={canvasRefs[0]} style={{ width: '300px', height: '300px' }}></div>
+                    <div className="three-display-box" ref={canvasRefs[1]} style={{ width: '300px', height: '300px' }}></div>
+                    <div className="three-display-box" ref={canvasRefs[2]} style={{ width: '300px', height: '300px' }}></div>
+                </div>
+            </div>
             <section className="cta-section">
                 <h2>Ready to Start Your 3D Journey?</h2>
                 <p>
@@ -117,20 +127,6 @@ const Home = () => {
                 <button className="cta-button">Get Started</button>
             </section>
         </div>
-
-        // <div className="homepage-container">
-        //     <section className="hero-section">
-        //         <div className="blob"></div>
-        //         <div className="hero-content">
-        //             {/* <h1 className="hero-title">Polygen</h1> */}
-        //             <img src="polygen.png" alt="Logo" className="heroimg" />
-        //             <p className="hero-subtitle">Making your imagination reality</p>
-        //             <button className="start-button" onClick={handleStartGenerating}>Start Generating</button>
-        //         </div>
-        //     </section>
-        // </div>
-
-        
     );
 };
 
