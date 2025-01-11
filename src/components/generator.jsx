@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { uploadBytesResumable, getDownloadURL, ref, deleteObject } from "firebase/storage";
@@ -8,11 +8,16 @@ import stepOne from "../img/Step One.png";
 import stepTwo from "../img/StepTwo.png";
 import stepThree from "../img/StepThree.png"
 import { div } from "three/webgpu";
+import * as THREE from 'three';
+import { GLTFLoader, OrbitControls } from 'three-stdlib';
+
 //hi
 const SF3DUpload = () => {
     const auth = getAuth();
     const user = auth.currentUser;
     var userID;
+    const canvasRefs = [useRef(), useRef(), useRef()];
+    
 
     if (user) {
         userID = user.uid;
@@ -64,6 +69,61 @@ const SF3DUpload = () => {
             socket.disconnect();
         };
     }, [socket]);
+
+        useEffect(() => {
+            canvasRefs.forEach((canvasRef, index) => {
+                if (!canvasRef.current) return;
+    
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, canvasRef.current.clientWidth / canvasRef.current.clientHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setSize(canvasRef.current.clientWidth, canvasRef.current.clientHeight);
+                canvasRef.current.appendChild(renderer.domElement);
+    
+                const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+                scene.add(ambientLight);
+    
+                const loader = new GLTFLoader();
+                const modelPaths = [
+                    '/avatar.glb',
+                    '/purse.glb',
+                    '/models/mesh3.glb',
+                ];
+    
+                loader.load(
+                    modelPaths[index],
+                    (gltf) => {
+                        const model = gltf.scene;
+                        model.scale.set(1.5, 1.5, 1.5);
+                        scene.add(model);
+                        animate();
+                    },
+                    undefined,
+                    (error) => {
+                        console.error(`Error loading 3D model ${index + 1}:`, error);
+                    }
+                );
+    
+                const controls = new OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.1;
+                camera.position.set(0, 1, 5);
+    
+                const animate = () => {
+                    requestAnimationFrame(animate);
+                    controls.update();
+                    renderer.render(scene, camera);
+                };
+    
+                return () => {
+                    if (renderer.domElement && canvasRef.current) {
+                        canvasRef.current.removeChild(renderer.domElement);
+                    }
+                };
+            });
+        }, []);
+
+
 
     const checkServerStatus = async () => {
         try {
@@ -207,6 +267,27 @@ const SF3DUpload = () => {
         }));
     };
 
+    const handleDrop = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const files = Array.from(e.dataTransfer.files);
+        if (files.length > 0) {
+            handleFileChange((prevImages) => [...prevImages, ...files]);
+        }
+        e.currentTarget.classList.remove("drag-over");
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.classList.add("drag-over");
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.classList.remove("drag-over");
+    };
 
 
     return (
@@ -214,7 +295,7 @@ const SF3DUpload = () => {
             <div className="blob"></div>
             <div className="input-container">
                 <div className="info-text">
-                    This app allows you to upload image(s) and converts them into 3D models using SF3D!
+                    This app allows you to upload image(s) and converts them into 3D models using AI!
                 </div>
                 <div className="send-container">
                     <input
@@ -223,6 +304,7 @@ const SF3DUpload = () => {
                         className="file-input"
                         id="file"   
                     />
+                    <div className="viewer-previewer-container">
                     {image && <img src={URL.createObjectURL(image)} alt="Selected" className="preview-image" />}
 
                     {/* settings module */}
@@ -369,15 +451,25 @@ const SF3DUpload = () => {
                         <button className="download-button" onClick={downloadModel}>
                             Download Model
                         </button>
-                    )}
-
-                    <button className="upload-button" onClick={handleSend}>
+                    )}                 
+                    <p className="status-message">{statusMessage}</p>
+                    
+                    {/* <button className="upload-button" onClick={handleSend}>
                         Upload
                     </button>
                     <button className="settings-button" onClick={openSettings}>
                         Settings
+                    </button> */}
+
+                    <div className="three-display-box" ref={canvasRefs[0]} style={{ width: '300px', height: '400px', display: 'flex'}}></div>
+
+                    </div>
+                    {/* here */}
+
+                    <button className="download-button" onClick={downloadModel}>
+                        Download Model
                     </button>
-                    <p className="status-message">{statusMessage}</p>
+
                 </div>
             </div>
             <div className="instructions-section">

@@ -124,7 +124,7 @@ const Home = () => {
                     Polygen makes 3D modeling accessible to everyone. Get started now
                     and bring your ideas to life.
                 </p>
-                <button className="cta-button">Get Started</button>
+                <button className="cta-button" onClick={handleStartGenerating}>Get Started</button>
             </section>
         </div>
     );

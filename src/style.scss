@@ -476,6 +476,8 @@ body {
     max-width: 800px;
 }
 
+
+
 .info-text {
     padding: 20px 2rem;
     font-size: 2rem;
@@ -542,10 +544,19 @@ body {
 }
 
 .preview-image {
-    max-width: 100px;
+    max-width: 300px;
     margin: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+}
+
+.three-display-box {
+    background: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(206, 198, 198, 0.479);
+        border-color: black;
+        border-width: 40px;
 }
 
 .status-message, .extra-info {
@@ -553,6 +564,13 @@ body {
     color: #ddd;
     margin-top: 15px;
     font-weight: 1000;
+}
+.viewer-previewer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between the previewer and viewer */
+    margin-bottom: 20px;
 }
 
 .drag-drop-area {
@@ -881,6 +899,8 @@ body {
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 4px 8px rgba(206, 198, 198, 0.479);
+        border-color: black;
+        border-width: 40px;
     }
 
     p {
@@ -901,6 +921,7 @@ body {
         overflow: hidden;
     }
 }
+
 
 //--------------------------- home -----------------
 @import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
